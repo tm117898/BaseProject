@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="bottom"
+              android:gravity="center"
+              android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/show_full_screen_window_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="显示全屏悬浮窗"/>
+
+    <Button
+        android:id="@+id/show_half_screen_window_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="显示半屏悬浮窗"/>
+
+    <Button
+        android:id="@+id/dismiss_half_screen_window_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="关闭半屏悬浮窗"/>
+
+</LinearLayout>

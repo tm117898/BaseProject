@@ -3,7 +3,7 @@ package cesc.shang.baselib.base.application;
 import android.content.Context;
 
 import cesc.shang.baselib.support.BaseContextSupport;
-import cesc.shang.baselib.support.controller.AppController;
+import cesc.shang.baselib.support.controller.ControllerManager;
 import cesc.shang.baselib.support.manager.AppManager;
 import cesc.shang.baselib.support.utils.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
@@ -11,7 +11,7 @@ import cesc.shang.utilslib.utils.debug.LogUtils;
 /**
  * Created by shanghaolongteng on 2016/7/14.
  */
-public abstract class BaseApplication<C extends AppController, M extends AppManager, U extends UtilsManager> extends MultiDexApplication implements BaseContextSupport {
+public abstract class BaseApplication<C extends ControllerManager, M extends AppManager, U extends UtilsManager> extends MultiDexApplication implements BaseContextSupport {
     protected C c;
     protected M m;
     protected U u;
@@ -80,8 +80,7 @@ public abstract class BaseApplication<C extends AppController, M extends AppMana
         return this;
     }
 
-    @Override
-    public AppController getAppController() {
+    public ControllerManager getControllerManager() {
         return c;
     }
 

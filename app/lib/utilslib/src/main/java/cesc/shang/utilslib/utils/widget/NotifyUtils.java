@@ -13,8 +13,8 @@ import android.widget.RemoteViews;
  * Created by shanghaolongteng on 2016/8/10.
  */
 public class NotifyUtils {
-    public static Notification createSystemNotify(Context context, int iconId, String tickerText, String contentTitle, String setContentText, int number,
-                                                  PendingIntent intent, int flags) {
+    public Notification createSystemNotify(Context context, int iconId, String tickerText, String contentTitle, String setContentText, int number,
+                                           PendingIntent intent, int flags) {
         NotificationCompat.Builder build = new NotificationCompat.Builder(context);
         if (iconId > 0)
             build.setSmallIcon(iconId);
@@ -35,7 +35,7 @@ public class NotifyUtils {
         return notify;
     }
 
-    private static Notification build(NotificationCompat.Builder build) {
+    private Notification build(NotificationCompat.Builder build) {
         Notification notify;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             notify = build.build();
@@ -45,25 +45,25 @@ public class NotifyUtils {
         return notify;
     }
 
-    public static int notify(Context context, int id,
-                             int iconId, String tickerText, String contentTitle, String setContentText, int number, PendingIntent intent, int flags) {
+    public int notify(Context context, int id,
+                      int iconId, String tickerText, String contentTitle, String setContentText, int number, PendingIntent intent, int flags) {
         Notification notification = createSystemNotify(context, iconId, tickerText, contentTitle, setContentText, number, intent, flags);
         getNotificationManager(context).notify(id, notification);
         return id;
     }
 
-    public static int notify(Context context, int id, int iconId, String tickerText, RemoteViews content, PendingIntent intent, int flags) {
+    public int notify(Context context, int id, int iconId, String tickerText, RemoteViews content, PendingIntent intent, int flags) {
         Notification notification = createSystemNotify(context, iconId, tickerText, null, null, -1, intent, flags);
         notification.contentView = content;
         getNotificationManager(context).notify(id, notification);
         return id;
     }
 
-    public static NotificationManager getNotificationManager(Context context) {
+    public NotificationManager getNotificationManager(Context context) {
         return (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
-    public static void cancel(Context context, int id) {
+    public void cancel(Context context, int id) {
         getNotificationManager(context).cancel(id);
     }
 }

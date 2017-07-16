@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/message_text"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
+        android:padding="10dp" />
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/user_1_on_line_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户1上线" />
+
+        <Button
+            android:id="@+id/user_1_off_line_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户1下线" />
+
+        <Button
+            android:id="@+id/user_1_send_overall_message_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户1发送全局消息" />
+
+        <Button
+            android:id="@+id/user_1_send_user_2_message_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户1发送消息给用户2" />
+
+        <Button
+            android:id="@+id/user_2_on_line_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户2上线" />
+
+        <Button
+            android:id="@+id/user_2_off_line_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户2下线" />
+
+        <Button
+            android:id="@+id/user_2send_overall_message_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户2发送全局消息" />
+
+        <Button
+            android:id="@+id/user_2_send_user_1_message_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户2发送消息给用户1" />
+    </LinearLayout>
+</LinearLayout>

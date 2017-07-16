@@ -7,7 +7,7 @@ import android.os.IBinder;
 
 import cesc.shang.baselib.support.BaseContextSupport;
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.controller.AppController;
+import cesc.shang.baselib.support.controller.ControllerManager;
 import cesc.shang.baselib.support.manager.AppManager;
 import cesc.shang.baselib.support.utils.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
@@ -76,11 +76,6 @@ public class BaseService extends Service implements BaseContextSupport {
     @Override
     public BaseApplication getApp() {
         return (BaseApplication) this.getApplication();
-    }
-
-    @Override
-    public AppController getAppController() {
-        return getApp().getAppController();
     }
 
     @Override

@@ -1,0 +1,80 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="cesc.shang.demo">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FIND_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 使用OpenGl , start -->
+    <uses-feature android:glEsVersion="0x00020000"/><!-- 版本号 -->
+    <supports-gl-texture android:name="GL_OES_compressed_ETC1_RGB8_texture"/>
+    <supports-gl-texture android:name="GL_IMG_texture_compression_pvrtc"/>
+    <!-- 使用OpenGl , end -->
+    <!-- 悬浮窗权限 , start -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <!-- 悬浮窗权限 , end -->
+    <!-- aidl实例bindService的权限 , start -->
+    <uses-permission android:name="cesc.shang.demo.examples.ipc.aidl.permission.access"/>
+    <permission android:name="cesc.shang.demo.examples.ipc.aidl.permission.access"/>
+    <!-- aidl实例bindService的权限 , end -->
+
+    <!-- largeHeap可获得更大内存 -->
+    <application
+        android:name=".application.DemoApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".examples.main.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".examples.window.WindowActivity"/>
+        <activity android:name=".examples.animation.AnimationActivity"/>
+        <activity android:name=".examples.drawable.DrawableActivity"/>
+        <activity android:name=".examples.notify.NotifyActivity"/>
+        <activity android:name=".examples.view.conflict.exteriorintercept.ExteriorInterceptActivity"/>
+        <activity android:name=".examples.view.event.TouchEventActivity"/>
+        <activity android:name=".examples.view.move.TouchMoveActivity"/>
+
+        <activity android:name=".examples.ipc.binderconnectionpool.BinderActivity"/>
+
+        <service
+            android:name=".examples.ipc.binderconnectionpool.BinderService"
+            android:process=":binder"/>
+
+        <activity android:name=".examples.ipc.aidl.AIDLActivity"/>
+
+        <service
+            android:name=".examples.ipc.aidl.AIDLService"
+            android:process=":aidl"/>
+
+        <activity android:name=".examples.ipc.socket.SocketActivity"/>
+
+        <service
+            android:name=".examples.ipc.socket.SocketService"
+            android:process=":socket"/>
+
+        <activity android:name=".examples.ipc.messenger.MessengerActivity"/>
+
+        <service
+            android:name=".examples.ipc.messenger.MessengerService"
+            android:process=":messenger"/>
+
+        <activity android:name=".examples.serializable.SerializableActivity"/>
+        <activity android:name=".examples.activitywwitchorder.ActivitySwitchOrderActivity1"/>
+        <activity android:name=".examples.activitywwitchorder.ActivitySwitchOrderActivity2"/>
+        <activity android:name=".examples.listview.anim.ListViewAnimActivity"/>
+        <activity android:name=".examples.textmethod.TextMethodActivity"/>
+        <activity android:name=".examples.listview.choicemodel.ListViewChoiceModelActivity"/>
+        <activity android:name=".examples.switchview.SwitchViewActivity"/>
+        <activity android:name=".examples.customxmlarrt.CustomXmlArrtActivity"/>
+    </application>
+</manifest>

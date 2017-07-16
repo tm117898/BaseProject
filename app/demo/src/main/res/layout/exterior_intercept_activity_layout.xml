@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cesc.shang.demo.examples.view.conflict.exteriorintercept.ExteriorInterceptGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                                                                                 android:layout_width="match_parent"
+                                                                                 android:layout_height="match_parent"
+                                                                                 android:background="@android:color/black">
+
+    <cesc.shang.demo.examples.view.conflict.base.HorizontalViewGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_red_dark"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_green_dark"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_blue_dark"/>
+    </cesc.shang.demo.examples.view.conflict.base.HorizontalViewGroup>
+
+    <cesc.shang.demo.examples.view.conflict.base.HorizontalViewGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_green_dark"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_blue_dark"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_red_dark"/>
+    </cesc.shang.demo.examples.view.conflict.base.HorizontalViewGroup>
+
+    <cesc.shang.demo.examples.view.conflict.base.HorizontalViewGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_blue_dark"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_red_dark"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_green_dark"/>
+    </cesc.shang.demo.examples.view.conflict.base.HorizontalViewGroup>
+
+</cesc.shang.demo.examples.view.conflict.exteriorintercept.ExteriorInterceptGroup>

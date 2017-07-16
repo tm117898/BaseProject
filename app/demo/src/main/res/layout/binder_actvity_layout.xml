@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:padding="10dp">
+
+    <Button
+        android:id="@+id/get_first_binder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="获取FirstBinder"/>
+
+    <Button
+        android:id="@+id/call_first_binder_method"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="调用FirstBinder方法"/>
+
+    <Button
+        android:id="@+id/get_second_binder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="获取SecondBinder"/>
+
+    <Button
+        android:id="@+id/call_second_binder_method"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="调用SecondBinder方法"/>
+</LinearLayout>

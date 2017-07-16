@@ -1,6 +1,7 @@
 package cesc.shang.baselib.base.crash;
 
 import android.os.Process;
+import android.util.Log;
 
 import cesc.shang.baselib.support.BaseContextSupport;
 import cesc.shang.utilslib.utils.debug.LogUtils;
@@ -18,7 +19,7 @@ public class BaseCrashHandler implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
         mLog.e("BaseCrashHandler , uncaughtException");
-        ex.printStackTrace();
+        mLog.e(ex);
 
         disposeException(thread, ex);
 

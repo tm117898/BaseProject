@@ -33,8 +33,8 @@ public abstract class BaseSocketServer {
 
     public BaseSocketServer(BaseApplication app) {
         mApp = app;
+        mLog = getUtilsManager().getLogUtils(BaseSocketServer.class.getSimpleName());
         mAcceptWork = getThreadUtils().getHandlerThread(ACCEPT_THREAD_NAME);
-
         mAcceptWork.post(new Runnable() {
             @Override
             public void run() {

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cesc.shang.demo.examples.view.event.TouchEventViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="match_parent"
+                                                     android:background="@android:color/black">
+
+    <cesc.shang.demo.examples.view.event.TouchEventViewGroup
+        android:layout_width="300dp"
+        android:layout_height="600dp"
+        android:background="@android:color/holo_green_dark">
+
+        <cesc.shang.demo.examples.view.event.TouchEventView
+            android:layout_width="250dp"
+            android:layout_height="500dp"
+            android:background="@android:color/holo_blue_bright"/>
+
+        <cesc.shang.demo.examples.view.event.TouchEventView
+            android:layout_width="225dp"
+            android:layout_height="450dp"
+            android:background="@android:color/background_light"/>
+
+    </cesc.shang.demo.examples.view.event.TouchEventViewGroup>
+
+    <cesc.shang.demo.examples.view.event.TouchEventView
+        android:layout_width="200dp"
+        android:layout_height="400dp"
+        android:background="@android:color/holo_orange_dark"/>
+
+    <cesc.shang.demo.examples.view.event.TouchEventView
+        android:layout_width="175dp"
+        android:layout_height="350dp"
+        android:background="@android:color/holo_red_dark"/>
+</cesc.shang.demo.examples.view.event.TouchEventViewGroup>

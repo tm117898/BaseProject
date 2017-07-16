@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+     android:ordering="sequentially">
+    <objectAnimator
+        android:duration="500"
+        android:propertyName="alpha"
+        android:repeatCount="0"
+        android:repeatMode="restart"
+        android:startOffset="0"
+        android:valueFrom="1"
+        android:valueTo="0.5"
+        android:valueType="floatType"/>
+
+    <objectAnimator
+        android:duration="500"
+        android:propertyName="translationX"
+        android:repeatCount="0"
+        android:repeatMode="restart"
+        android:startOffset="0"
+        android:valueFrom="0"
+        android:valueTo="-50"
+        android:valueType="floatType"/>
+
+    <objectAnimator
+        android:duration="500"
+        android:propertyName="translationY"
+        android:repeatCount="0"
+        android:repeatMode="restart"
+        android:startOffset="0"
+        android:valueFrom="50"
+        android:valueTo="0"
+        android:valueType="floatType"/>
+
+    <objectAnimator
+        android:duration="500"
+        android:propertyName="scaleX"
+        android:repeatCount="0"
+        android:repeatMode="restart"
+        android:startOffset="0"
+        android:valueFrom="0.5"
+        android:valueTo="1"
+        android:valueType="floatType"/>
+
+    <objectAnimator
+        android:duration="500"
+        android:propertyName="scaleY"
+        android:repeatCount="0"
+        android:repeatMode="restart"
+        android:startOffset="0"
+        android:valueFrom="0.8"
+        android:valueTo="1.5"
+        android:valueType="floatType"/>
+
+    <objectAnimator
+        android:duration="500"
+        android:propertyName="rotationX"
+        android:repeatCount="0"
+        android:repeatMode="restart"
+        android:startOffset="0"
+        android:valueFrom="0"
+        android:valueTo="20"
+        android:valueType="floatType"/>
+
+    <objectAnimator
+        android:duration="500"
+        android:propertyName="rotationY"
+        android:repeatCount="0"
+        android:repeatMode="restart"
+        android:startOffset="0"
+        android:valueFrom="-30"
+        android:valueTo="0"
+        android:valueType="floatType"/>
+
+    <objectAnimator
+        android:duration="500"
+        android:propertyName="backgroundColor"
+        android:repeatCount="0"
+        android:repeatMode="restart"
+        android:startOffset="0"
+        android:valueFrom="@color/colorPrimaryDark"
+        android:valueTo="@color/colorAccent"/><!-- 颜色动画不需要valueType -->
+</set>

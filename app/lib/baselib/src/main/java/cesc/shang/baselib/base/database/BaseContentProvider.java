@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 
 import cesc.shang.baselib.support.BaseContextSupport;
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.controller.AppController;
+import cesc.shang.baselib.support.controller.ControllerManager;
 import cesc.shang.baselib.support.manager.AppManager;
 import cesc.shang.baselib.support.utils.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
@@ -72,11 +72,6 @@ public class BaseContentProvider extends ContentProvider implements BaseContextS
     @Override
     public BaseApplication getApp() {
         return (BaseApplication) getContext().getApplicationContext();
-    }
-
-    @Override
-    public AppController getAppController() {
-        return getApp().getAppController();
     }
 
     @Override

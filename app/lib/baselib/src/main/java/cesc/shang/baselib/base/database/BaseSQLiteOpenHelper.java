@@ -11,7 +11,7 @@ import java.util.List;
 
 import cesc.shang.baselib.base.application.BaseApplication;
 import cesc.shang.baselib.support.BaseSupport;
-import cesc.shang.baselib.support.controller.AppController;
+import cesc.shang.baselib.support.controller.ControllerManager;
 import cesc.shang.baselib.support.manager.AppManager;
 import cesc.shang.baselib.support.utils.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
@@ -105,11 +105,6 @@ public class BaseSQLiteOpenHelper extends SQLiteOpenHelper implements BaseSuppor
     @Override
     public BaseApplication getApp(Context context) {
         return (BaseApplication) context.getApplicationContext();
-    }
-
-    @Override
-    public AppController getAppController(Context context) {
-        return getApp(context).getAppController();
     }
 
     @Override

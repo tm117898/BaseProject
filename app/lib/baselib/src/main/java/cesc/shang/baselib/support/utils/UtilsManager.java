@@ -8,6 +8,8 @@ import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 
+import cesc.shang.baselib.base.application.BaseApplication;
+import cesc.shang.baselib.support.BaseManager;
 import cesc.shang.utilslib.utils.debug.DebugUtils;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 import cesc.shang.utilslib.utils.debug.ProcessUtils;
@@ -21,6 +23,10 @@ import cesc.shang.utilslib.utils.device.LocationUtils;
 import cesc.shang.utilslib.utils.device.MemoryUtils;
 import cesc.shang.utilslib.utils.device.NetWorkUtils;
 import cesc.shang.utilslib.utils.device.SensorUtils;
+import cesc.shang.utilslib.utils.file.FileUtils;
+import cesc.shang.utilslib.utils.file.LruCatchUtils;
+import cesc.shang.utilslib.utils.file.SerializableUtils;
+import cesc.shang.utilslib.utils.file.XmlUtils;
 import cesc.shang.utilslib.utils.util.DateTimeUtils;
 import cesc.shang.utilslib.utils.util.MapSetUtils;
 import cesc.shang.utilslib.utils.util.MessageUtils;
@@ -38,7 +44,7 @@ import cesc.shang.utilslib.utils.widget.ViewUtils;
  * Created by shanghaolongteng on 2017/5/6.
  */
 
-public class UtilsManager {
+public class UtilsManager extends BaseManager {
     protected SoftReference<DebugUtils> mDebugUtils;
     protected Map<String, LogUtils> mLogUtils;
     protected SoftReference<ProcessUtils> mProcessUtils;
@@ -54,6 +60,11 @@ public class UtilsManager {
     protected NetWorkUtils mNetWorkUtils;
     protected SensorUtils mSensorUtils;
 
+    protected FileUtils mFileUtils;
+    protected LruCatchUtils mLruCatchUtils;
+    protected SerializableUtils mSerializableUtils;
+    protected XmlUtils mXmlUtils;
+
     protected DateTimeUtils mDateTimeUtils;
     protected MapSetUtils mMapSetUtils;
     protected MessageUtils mMessageUtils;
@@ -68,7 +79,8 @@ public class UtilsManager {
     protected ViewTouchUtils mViewTouchUtils;
     protected ViewUtils mViewUtils;
 
-    public UtilsManager() {
+    public UtilsManager(BaseApplication app) {
+        super(app);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             mLogUtils = new ArrayMap<>();
         } else {
@@ -169,6 +181,34 @@ public class UtilsManager {
             mSensorUtils = new SensorUtils();
         }
         return mSensorUtils;
+    }
+
+    public FileUtils getFileUtils() {
+        if (mFileUtils == null) {
+            mFileUtils = new FileUtils();
+        }
+        return mFileUtils;
+    }
+
+    public LruCatchUtils getLruCatchUtils() {
+        if (mLruCatchUtils == null) {
+            mLruCatchUtils = new LruCatchUtils();
+        }
+        return mLruCatchUtils;
+    }
+
+    public SerializableUtils getSerializableUtils() {
+        if (mSerializableUtils == null) {
+            mSerializableUtils = new SerializableUtils();
+        }
+        return mSerializableUtils;
+    }
+
+    public XmlUtils getXmlUtils() {
+        if (mXmlUtils == null) {
+            mXmlUtils = new XmlUtils();
+        }
+        return mXmlUtils;
     }
 
     public DateTimeUtils getDateTimeUtils() {

@@ -27,24 +27,15 @@ public class ActivityUtils {
 
     public void enableFullScreen(Activity activity) {
         Window window = activity.getWindow();
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-        } else {
-            View view = window.getDecorView();
-            view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
-        }
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     public void disableFullScreen(Activity activity) {
         Window window = activity.getWindow();
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        } else {
-            View view = window.getDecorView();
-            view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-        }
+        final WindowManager.LayoutParams attrs = window.getAttributes();
+        attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        window.setAttributes(attrs);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 
     public void startCameraActivityForResult(Activity activity, CharSequence title, int requestCode) {

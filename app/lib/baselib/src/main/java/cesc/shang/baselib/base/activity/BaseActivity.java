@@ -7,9 +7,10 @@ import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cesc.shang.baselib.support.BaseContextSupport;
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.controller.AppController;
+import cesc.shang.baselib.support.controller.ControllerManager;
 import cesc.shang.baselib.support.manager.AppManager;
 import cesc.shang.baselib.support.utils.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
@@ -19,6 +20,7 @@ import cesc.shang.utilslib.utils.debug.LogUtils;
  */
 public abstract class BaseActivity extends FragmentActivity implements BaseContextSupport {
     protected LogUtils mLog;
+    protected Unbinder mButterKnife;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +28,16 @@ public abstract class BaseActivity extends FragmentActivity implements BaseConte
         setContentView(getContentViewId());
         mLog = getUtilsManager().getLogUtils(this.getClass().getSimpleName());
         mLog.i("onCreate()");
-        ButterKnife.bind(this);
+        mButterKnife = ButterKnife.bind(this);
+        setupView();
         setAdapter();
         initData();
     }
 
     public abstract int getContentViewId();
+
+    public void setupView() {
+    }
 
     public void setAdapter() {
     }
@@ -61,6 +67,7 @@ public abstract class BaseActivity extends FragmentActivity implements BaseConte
     protected void onDestroy() {
         super.onDestroy();
         mLog.i("onDestroy()");
+        mButterKnife.unbind();
     }
 
     @Override
@@ -83,11 +90,6 @@ public abstract class BaseActivity extends FragmentActivity implements BaseConte
     @Override
     public BaseApplication getApp() {
         return (BaseApplication) this.getApplication();
-    }
-
-    @Override
-    public AppController getAppController() {
-        return getApp().getAppController();
     }
 
     @Override
