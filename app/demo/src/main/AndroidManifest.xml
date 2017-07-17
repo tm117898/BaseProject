@@ -76,5 +76,6 @@
         <activity android:name=".examples.listview.choicemodel.ListViewChoiceModelActivity"/>
         <activity android:name=".examples.switchview.SwitchViewActivity"/>
         <activity android:name=".examples.customxmlarrt.CustomXmlArrtActivity"/>
+        <activity android:name=".examples.okhttp.OkHttpActivity"/>
     </application>
 </manifest>

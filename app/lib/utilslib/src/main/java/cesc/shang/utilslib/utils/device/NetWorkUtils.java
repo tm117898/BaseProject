@@ -11,27 +11,14 @@ public class NetWorkUtils {
     public NetWorkUtils() {
     }
 
-    public boolean isNetworkAvailable(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        context = null;
-        if (cm == null) {
-            return false;
-        }
-
-        NetworkInfo[] info = cm.getAllNetworkInfo();
-        cm = null;
-
-        if (info != null) {
-            for (int i = 0; i < info.length; i++) {
-                if (info[i] != null) {
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-                        info = null;
-                        return true;
-                    }
-                }
+    public boolean isConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+            if (mNetworkInfo != null) {
+                return mNetworkInfo.isAvailable();
             }
         }
-        info = null;
         return false;
     }
 

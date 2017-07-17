@@ -17,6 +17,7 @@ import cesc.shang.demo.examples.ipc.socket.SocketActivity;
 import cesc.shang.demo.examples.listview.anim.ListViewAnimActivity;
 import cesc.shang.demo.examples.listview.choicemodel.ListViewChoiceModelActivity;
 import cesc.shang.demo.examples.notify.NotifyActivity;
+import cesc.shang.demo.examples.okhttp.OkHttpActivity;
 import cesc.shang.demo.examples.serializable.SerializableActivity;
 import cesc.shang.demo.examples.switchview.SwitchViewActivity;
 import cesc.shang.demo.examples.textmethod.TextMethodActivity;
@@ -42,6 +43,7 @@ public class MainController extends BaseManager {
 
                 final List<MainActivityListEntity> list = new ArrayList<>();
 
+                list.add(new MainActivityListEntity("OkHttp示例", OkHttpActivity.class));
                 list.add(new MainActivityListEntity("悬浮窗示例", WindowActivity.class));
                 list.add(new MainActivityListEntity("Animation示例", AnimationActivity.class));
                 list.add(new MainActivityListEntity("Drawable示例", DrawableActivity.class));
@@ -60,6 +62,7 @@ public class MainController extends BaseManager {
                 list.add(new MainActivityListEntity("ListView瀑布流进入", ListViewAnimActivity.class));
                 list.add(new MainActivityListEntity("TextSwitch和ImageSwitch", SwitchViewActivity.class));
                 list.add(new MainActivityListEntity("自定义xml属性", CustomXmlArrtActivity.class));
+
                 callBack.onSuccess(list);
             }
         }.start();

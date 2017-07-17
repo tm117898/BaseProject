@@ -8,7 +8,16 @@ import cesc.shang.baselib.support.BaseManager;
  */
 
 public class AppManager extends BaseManager {
+    protected HttpManager mHttpManager;
+
     public AppManager(BaseApplication app) {
         super(app);
+    }
+
+    public HttpManager getHttpManager() {
+        if (mHttpManager == null) {
+            mHttpManager = new HttpManager(mApp);
+        }
+        return mHttpManager;
     }
 }

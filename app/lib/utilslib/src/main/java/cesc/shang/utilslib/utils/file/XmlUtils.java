@@ -3,7 +3,9 @@ package cesc.shang.utilslib.utils.file;
 import android.util.Xml;
 
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -41,7 +43,7 @@ public class XmlUtils {
 
         void endDocument();
 
-        void startTag(XmlPullParser parser);
+        void startTag(XmlPullParser parser) throws IOException, XmlPullParserException;
 
         void endTag(XmlPullParser parser);
     }

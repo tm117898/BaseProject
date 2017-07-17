@@ -27,6 +27,7 @@ import cesc.shang.utilslib.utils.file.FileUtils;
 import cesc.shang.utilslib.utils.file.LruCatchUtils;
 import cesc.shang.utilslib.utils.file.SerializableUtils;
 import cesc.shang.utilslib.utils.file.XmlUtils;
+import cesc.shang.utilslib.utils.okhttp.OkHttpUtils;
 import cesc.shang.utilslib.utils.util.DateTimeUtils;
 import cesc.shang.utilslib.utils.util.MapSetUtils;
 import cesc.shang.utilslib.utils.util.MessageUtils;
@@ -78,6 +79,8 @@ public class UtilsManager extends BaseManager {
     protected NotifyUtils mNotifyUtils;
     protected ViewTouchUtils mViewTouchUtils;
     protected ViewUtils mViewUtils;
+
+    protected OkHttpUtils mOkhttpUtils;
 
     public UtilsManager(BaseApplication app) {
         super(app);
@@ -293,5 +296,12 @@ public class UtilsManager extends BaseManager {
             mViewUtils = new ViewUtils();
         }
         return mViewUtils;
+    }
+
+    public OkHttpUtils getOkHttpUtils() {
+        if (mOkhttpUtils == null) {
+            mOkhttpUtils = new OkHttpUtils();
+        }
+        return mOkhttpUtils;
     }
 }

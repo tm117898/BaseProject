@@ -6,6 +6,7 @@ import cesc.shang.demo.examples.ipc.aidl.AIDLController;
 import cesc.shang.demo.examples.ipc.binderconnectionpool.BinderController;
 import cesc.shang.demo.examples.ipc.socket.SocketController;
 import cesc.shang.demo.examples.main.MainController;
+import cesc.shang.demo.examples.okhttp.OkHttpController;
 
 /**
  * Created by shanghaolongteng on 2017/7/16.
@@ -16,6 +17,7 @@ public class AppController extends ControllerManager {
     private BinderController mBinder;
     private AIDLController mAidl;
     private SocketController mSocket;
+    private OkHttpController mOkHttp;
 
     public AppController(BaseApplication app) {
         super(app);
@@ -47,5 +49,12 @@ public class AppController extends ControllerManager {
             mSocket = new SocketController(mApp);
         }
         return mSocket;
+    }
+
+    public OkHttpController getOkHttpController() {
+        if (mOkHttp == null) {
+            mOkHttp = new OkHttpController(mApp);
+        }
+        return mOkHttp;
     }
 }
