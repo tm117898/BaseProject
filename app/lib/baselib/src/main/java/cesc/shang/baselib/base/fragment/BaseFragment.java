@@ -1,98 +1,101 @@
-package cesc.shang.baselib.base.activity;
+package cesc.shang.baselib.base.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.Toast;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import cesc.shang.baselib.base.fragment.BaseFragment;
-import cesc.shang.baselib.support.BaseContextSupport;
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.controller.ControllerManager;
+import cesc.shang.baselib.support.BaseContextSupport;
 import cesc.shang.baselib.support.manager.AppManager;
 import cesc.shang.baselib.support.utils.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**
- * Created by shanghaolongteng on 2016/7/14.
+ * Created by Cesc Shang on 2017/7/17.
  */
-public abstract class BaseActivity extends FragmentActivity implements BaseContextSupport {
+
+public abstract class BaseFragment extends Fragment implements BaseContextSupport {
     protected LogUtils mLog;
     protected Unbinder mButterKnife;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(getContentViewId());
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mLog = getUtilsManager().getLogUtils(this.getClass().getSimpleName());
-        mLog.i("onCreate()");
-        mButterKnife = ButterKnife.bind(this);
-        setupView();
+        mLog.i("onCreateView()");
+        View view = inflater.inflate(getContentViewId(), container, false);
+        mButterKnife = ButterKnife.bind(this, view);
+
+        setupView(view);
         setAdapter();
         initData();
+        return view;
     }
 
-    public abstract int getContentViewId();
+    protected abstract int getContentViewId();
 
-    public void setupView() {
+    protected void setupView(View rootView) {
     }
 
-    public void setAdapter() {
+    protected void setAdapter() {
     }
 
-    public void initData() {
+    protected void initData() {
     }
 
     @Override
-    protected void onResume() {
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mLog.i("onActivityCreated()");
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mLog.i("onCreate()");
+    }
+
+    @Override
+    public void onResume() {
         super.onResume();
         mLog.i("onResume()");
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
+    public void onStart() {
+        super.onStart();
         mLog.i("onRestart()");
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         mLog.i("onPause()");
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         mLog.i("onDestroy()");
         mButterKnife.unbind();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mLog.i("onActivityResult() , requestCode : ", requestCode, " , resultCode : ", resultCode, " , data : ", data);
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mLog.i("onSaveInstanceState()");
-    }
-
-    @Override
-    public Context getContext() {
-        return this;
-    }
-
-    @Override
     public BaseApplication getApp() {
-        return (BaseApplication) this.getApplication();
+        return (BaseApplication) getContext().getApplicationContext();
     }
 
     @Override
@@ -110,19 +113,11 @@ public abstract class BaseActivity extends FragmentActivity implements BaseConte
     }
 
     public void replaceFragment(int contentLayoutId, BaseFragment fragment, boolean isToBackStack) {
-        FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fm = getFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(contentLayoutId, fragment);
         if (isToBackStack)
             transaction.addToBackStack(null);
         transaction.commitAllowingStateLoss();
-    }
-
-    protected void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    protected void showToast(int messageId) {
-        Toast.makeText(this, messageId, Toast.LENGTH_SHORT).show();
     }
 }
