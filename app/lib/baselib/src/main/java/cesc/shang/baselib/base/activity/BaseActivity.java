@@ -80,6 +80,13 @@ public abstract class BaseActivity extends FragmentActivity implements BaseConte
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        mLog.i("onNewIntent() , intent : ", intent);
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mLog.i("onSaveInstanceState()");
