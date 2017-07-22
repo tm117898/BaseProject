@@ -80,17 +80,17 @@ public abstract class BaseApplication<C extends ControllerManager, M extends App
         return this;
     }
 
-    public ControllerManager getControllerManager() {
+    public C getControllerManager() {
         return c;
     }
 
     @Override
-    public AppManager getAppManager() {
+    public M getAppManager() {
         return m;
     }
 
     @Override
-    public UtilsManager getUtilsManager() {
+    public U getUtilsManager() {
         return u;
     }
 }
