@@ -34,6 +34,13 @@ public class HttpManager extends BaseManager {
         mGson = new Gson();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        mGson = null;
+    }
+
     public <T> void post(Context context, String url, JSONObject json, final Class resultClass, final IHttpCallBack callback) {
         NetWorkUtils utils = mApp.getUtilsManager().getNetWorkUtils();
         if (utils.isConnected(context)) {

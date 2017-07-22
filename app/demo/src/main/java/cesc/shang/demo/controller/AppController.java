@@ -23,6 +23,17 @@ public class AppController extends ControllerManager {
         super(app);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        mMain = null;
+        mBinder = null;
+        mAidl = null;
+        mSocket = null;
+        mOkHttp = null;
+    }
+
     public MainController getMainController() {
         if (mMain == null) {
             mMain = new MainController(mApp);

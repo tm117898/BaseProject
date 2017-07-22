@@ -84,11 +84,24 @@ public class UtilsManager extends BaseManager {
 
     public UtilsManager(BaseApplication app) {
         super(app);
+    }
+
+    @Override
+    public void onCreate(BaseApplication app) {
+        super.onCreate(app);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             mLogUtils = new ArrayMap<>();
         } else {
             mLogUtils = new HashMap<>();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        mLogUtils.clear();
     }
 
     public DebugUtils getDebugUtils() {

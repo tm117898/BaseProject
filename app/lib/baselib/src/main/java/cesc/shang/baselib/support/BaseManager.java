@@ -13,11 +13,11 @@ public class BaseManager {
         onCreate(app);
     }
 
-    protected void onCreate(BaseApplication app) {
+    public void onCreate(BaseApplication app) {
         mApp = app;
     }
 
-    protected void onDestroy() {
+    public void onDestroy() {
         mApp = null;
     }
 }

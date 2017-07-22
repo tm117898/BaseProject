@@ -14,6 +14,13 @@ public class AppManager extends BaseManager {
         super(app);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        mHttpManager = null;
+    }
+
     public HttpManager getHttpManager() {
         if (mHttpManager == null) {
             mHttpManager = new HttpManager(mApp);
