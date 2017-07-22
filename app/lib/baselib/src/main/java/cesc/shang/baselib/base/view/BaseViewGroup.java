@@ -160,6 +160,11 @@ public abstract class BaseViewGroup extends ViewGroup implements BaseContextSupp
     }
 
     @Override
+    public ControllerManager getControllerManager() {
+        return getApp().getControllerManager();
+    }
+
+    @Override
     public AppManager getAppManager() {
         return getApp().getAppManager();
     }

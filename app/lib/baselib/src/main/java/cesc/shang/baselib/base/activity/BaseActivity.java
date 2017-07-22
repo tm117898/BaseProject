@@ -96,6 +96,11 @@ public abstract class BaseActivity extends FragmentActivity implements BaseConte
     }
 
     @Override
+    public ControllerManager getControllerManager() {
+        return getApp().getControllerManager();
+    }
+
+    @Override
     public AppManager getAppManager() {
         return getApp().getAppManager();
     }

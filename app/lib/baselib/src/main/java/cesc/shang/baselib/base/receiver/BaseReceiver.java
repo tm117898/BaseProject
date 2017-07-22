@@ -30,6 +30,11 @@ public class BaseReceiver extends BroadcastReceiver implements BaseSupport {
     }
 
     @Override
+    public ControllerManager getControllerManager(Context context) {
+        return getApp(context).getControllerManager();
+    }
+
+    @Override
     public AppManager getAppManager(Context context) {
         return getApp(context).getAppManager();
     }

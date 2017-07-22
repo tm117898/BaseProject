@@ -108,6 +108,11 @@ public class BaseSQLiteOpenHelper extends SQLiteOpenHelper implements BaseSuppor
     }
 
     @Override
+    public ControllerManager getControllerManager(Context context) {
+        return getApp(context).getControllerManager();
+    }
+
+    @Override
     public AppManager getAppManager(Context context) {
         return getApp(context).getAppManager();
     }

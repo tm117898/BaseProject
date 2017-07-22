@@ -75,6 +75,11 @@ public class BaseContentProvider extends ContentProvider implements BaseContextS
     }
 
     @Override
+    public ControllerManager getControllerManager() {
+        return getApp().getControllerManager();
+    }
+
+    @Override
     public AppManager getAppManager() {
         return getApp().getAppManager();
     }
