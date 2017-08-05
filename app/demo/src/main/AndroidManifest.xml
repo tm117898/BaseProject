@@ -77,5 +77,6 @@
         <activity android:name=".examples.switchview.SwitchViewActivity"/>
         <activity android:name=".examples.customxmlarrt.CustomXmlArrtActivity"/>
         <activity android:name=".examples.okhttp.OkHttpActivity"/>
+        <activity android:name=".examples.reflect.ReflectActivity"/>
     </application>
 </manifest>

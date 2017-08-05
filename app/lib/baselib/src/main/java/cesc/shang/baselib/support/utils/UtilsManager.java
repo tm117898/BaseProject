@@ -13,6 +13,7 @@ import cesc.shang.baselib.support.BaseManager;
 import cesc.shang.utilslib.utils.debug.DebugUtils;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 import cesc.shang.utilslib.utils.debug.ProcessUtils;
+import cesc.shang.utilslib.utils.debug.ReflectUtils;
 import cesc.shang.utilslib.utils.debug.StrictModeUtils;
 import cesc.shang.utilslib.utils.device.AlarmUtils;
 import cesc.shang.utilslib.utils.device.AppUtils;
@@ -50,6 +51,7 @@ public class UtilsManager extends BaseManager {
     protected Map<String, LogUtils> mLogUtils;
     protected SoftReference<ProcessUtils> mProcessUtils;
     protected SoftReference<StrictModeUtils> mStrictModeUtils;
+    protected ReflectUtils mReflect;
 
     protected AlarmUtils mAlarmUtils;
     protected AppUtils mAppUtils;
@@ -120,6 +122,13 @@ public class UtilsManager extends BaseManager {
             mLogUtils.put(tag, logUtils);
         }
         return logUtils;
+    }
+
+    public ReflectUtils getReflectUtils() {
+        if (mReflect == null) {
+            mReflect = new ReflectUtils();
+        }
+        return mReflect;
     }
 
     public ProcessUtils getProcessUtils() {
