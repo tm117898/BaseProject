@@ -18,6 +18,7 @@ import cesc.shang.demo.examples.listview.anim.ListViewAnimActivity;
 import cesc.shang.demo.examples.listview.choicemodel.ListViewChoiceModelActivity;
 import cesc.shang.demo.examples.notify.NotifyActivity;
 import cesc.shang.demo.examples.okhttp.OkHttpActivity;
+import cesc.shang.demo.examples.proxy.ProxyActivity;
 import cesc.shang.demo.examples.reflect.ReflectActivity;
 import cesc.shang.demo.examples.serializable.SerializableActivity;
 import cesc.shang.demo.examples.switchview.SwitchViewActivity;
@@ -44,6 +45,7 @@ public class MainController extends BaseManager {
 
                 final List<MainActivityListEntity> list = new ArrayList<>();
 
+                list.add(new MainActivityListEntity("代理示例", ProxyActivity.class));
                 list.add(new MainActivityListEntity("反射分析示例", ReflectActivity.class));
                 list.add(new MainActivityListEntity("OkHttp示例", OkHttpActivity.class));
                 list.add(new MainActivityListEntity("悬浮窗示例", WindowActivity.class));

@@ -53,7 +53,7 @@ public class ReflectUtils {
         }
     }
 
-    protected void formatMethodsInfo(Class clazz, StringBuilder builder) {
+    public void formatMethodsInfo(Class clazz, StringBuilder builder) {
         Method[] methods = clazz.getMethods();
         if (methods != null && methods.length > 0) {
             for (Method method : methods) {

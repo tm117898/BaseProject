@@ -26,8 +26,8 @@ public class ListViewChoiceModelActivityListAdapter extends AdapterViewBaseAdapt
     @Override
     public VH getViewHolder(View convertView, int viewType) {
         VH vh = new VH();
-        vh.mText = convertView.findViewById(R.id.text);
-        vh.mCheckBox = convertView.findViewById(R.id.checkbox);
+        vh.mText = (TextView) convertView.findViewById(R.id.text);
+        vh.mCheckBox = (CheckBox) convertView.findViewById(R.id.checkbox);
         return vh;
     }
 

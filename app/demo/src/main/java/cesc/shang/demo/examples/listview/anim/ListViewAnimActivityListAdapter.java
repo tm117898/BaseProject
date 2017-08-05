@@ -24,7 +24,7 @@ public class ListViewAnimActivityListAdapter extends AdapterViewBaseAdapter<List
     @Override
     public VH getViewHolder(View convertView, int viewType) {
         VH vh = new VH();
-        vh.mText = convertView.findViewById(R.id.text);
+        vh.mText = (TextView) convertView.findViewById(R.id.text);
         return vh;
     }
 

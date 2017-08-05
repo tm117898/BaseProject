@@ -3,14 +3,14 @@ package cesc.shang.demo.examples.reflect;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import cesc.shang.baselib.base.activity.BaseActivity;
 import cesc.shang.demo.R;
+import cesc.shang.demo.base.DemoBaseActivity;
 
 /**
  * Created by shanghaolongteng on 2017/8/5.
  */
 
-public class ReflectActivity extends BaseActivity {
+public class ReflectActivity extends DemoBaseActivity {
     @BindView(R.id.info_text)
     TextView mInfoText;
 

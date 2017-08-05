@@ -78,5 +78,6 @@
         <activity android:name=".examples.customxmlarrt.CustomXmlArrtActivity"/>
         <activity android:name=".examples.okhttp.OkHttpActivity"/>
         <activity android:name=".examples.reflect.ReflectActivity"/>
+        <activity android:name=".examples.proxy.ProxyActivity"/>
     </application>
 </manifest>
