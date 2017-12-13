@@ -29,12 +29,18 @@ public abstract class BaseApplication<C extends ControllerManager, H extends Han
     public void onLowMemory() {
         super.onLowMemory();
         mLog.e("onLowMemory()");
+
+        c.destroy();
+        h.destroy();
     }
 
     @Override
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
         mLog.e("onTrimMemory() , level : ", level);
+        if (level == TRIM_MEMORY_COMPLETE) {
+            onLowMemory();
+        }
     }
 
     @Override
