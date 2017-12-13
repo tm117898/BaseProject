@@ -15,9 +15,15 @@ public class BatteryUtils {
 
     }
 
+    /**
+     * 注册电池相关广播
+     *
+     * @param context  上下文
+     * @param receiver 变化receiver
+     */
     public void register(Context context, BroadcastReceiver receiver) {
         IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_BATTERY_CHANGED);//只能动态注册
+        filter.addAction(Intent.ACTION_BATTERY_CHANGED); //只能动态注册
         filter.addAction(Intent.ACTION_BATTERY_LOW);
         filter.addAction(Intent.ACTION_BATTERY_OKAY);
         filter.addAction(Intent.ACTION_POWER_CONNECTED);
@@ -25,16 +31,29 @@ public class BatteryUtils {
 
         context.registerReceiver(receiver, filter);
 
-        enableBatteryReceiver(true, context, receiver.getClass());
+        changeBatteryReceiver(true, context, receiver.getClass());
     }
 
+    /**
+     * 反注册电池相关广播
+     *
+     * @param context  上下文
+     * @param receiver 变化receiver
+     */
     public void unregister(Context context, BroadcastReceiver receiver) {
         context.unregisterReceiver(receiver);
 
-        enableBatteryReceiver(false, context, receiver.getClass());
+        changeBatteryReceiver(false, context, receiver.getClass());
     }
 
-    public void enableBatteryReceiver(boolean enable, Context context, Class<?> receiverClass) {
+    /**
+     * 改变电池广播状态
+     *
+     * @param enable        是否接收消息
+     * @param context       上下文
+     * @param receiverClass 接收消息Receiver的Class
+     */
+    public void changeBatteryReceiver(boolean enable, Context context, Class<?> receiverClass) {
         int state;
         if (enable) {
             state = PackageManager.COMPONENT_ENABLED_STATE_ENABLED;

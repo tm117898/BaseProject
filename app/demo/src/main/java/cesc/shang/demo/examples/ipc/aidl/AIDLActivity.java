@@ -41,6 +41,8 @@ public class AIDLActivity extends DemoBaseActivity {
             case R.id.bind_button:
                 getAidlController().bindService();
                 break;
+            default:
+                break;
         }
     }
 
