@@ -53,16 +53,24 @@ public abstract class ServiceBindHelper implements ServiceConnection {
     private ServiceConnection mConn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            isBind = true;
-            mLog.i("onServiceConnected , name : ", name);
-            ServiceBindHelper.this.onServiceConnected(name, service);
+            serviceConnected(name, service);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            mLog.i("onServiceDisconnected , name : ", name);
-            ServiceBindHelper.this.onServiceDisconnected(name);
-            isBind = false;
+            serviceDisconnected(name);
         }
     };
+
+    protected void serviceConnected(ComponentName name, IBinder service) {
+        isBind = true;
+        mLog.i("onServiceConnected , name : ", name);
+        ServiceBindHelper.this.onServiceConnected(name, service);
+    }
+
+    protected void serviceDisconnected(ComponentName name) {
+        mLog.i("onServiceDisconnected , name : ", name);
+        ServiceBindHelper.this.onServiceDisconnected(name);
+        isBind = false;
+    }
 }

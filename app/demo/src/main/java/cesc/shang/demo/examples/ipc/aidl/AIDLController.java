@@ -6,6 +6,7 @@ import android.os.RemoteException;
 
 import cesc.shang.baselib.base.activity.BaseActivity;
 import cesc.shang.baselib.base.application.BaseApplication;
+import cesc.shang.baselib.base.service.ServiceAutoBindHelper;
 import cesc.shang.baselib.base.service.ServiceBindHelper;
 import cesc.shang.baselib.support.manager.base.BaseController;
 import cesc.shang.utilslib.utils.debug.LogUtils;
@@ -31,7 +32,7 @@ public class AIDLController extends BaseController {
     }
 
     public void onActivityCreate(BaseActivity activity) {
-        mHelper = new ServiceBindHelper(activity) {
+        mHelper = new ServiceAutoBindHelper(activity) {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
                 mAIDL = AidlInterface.Stub.asInterface(iBinder);
@@ -51,6 +52,7 @@ public class AIDLController extends BaseController {
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
+                mAIDL = null;
             }
         };
     }
