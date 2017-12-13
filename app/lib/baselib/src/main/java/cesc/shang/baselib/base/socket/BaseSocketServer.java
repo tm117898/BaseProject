@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.utils.UtilsManager;
+import cesc.shang.baselib.support.manager.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 import cesc.shang.utilslib.utils.util.MapSetUtils;
 import cesc.shang.utilslib.utils.util.ThreadUtils;

@@ -10,16 +10,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.BaseSupport;
-import cesc.shang.baselib.support.controller.ControllerManager;
-import cesc.shang.baselib.support.manager.AppManager;
-import cesc.shang.baselib.support.utils.UtilsManager;
+import cesc.shang.baselib.support.INotContextSupport;
+import cesc.shang.baselib.support.manager.ControllerManager;
+import cesc.shang.baselib.support.manager.HandlerManager;
+import cesc.shang.baselib.support.manager.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**
  * Created by shanghaolongteng on 2016/7/31.
  */
-public class BaseSQLiteOpenHelper extends SQLiteOpenHelper implements BaseSupport {
+public class BaseSQLiteOpenHelper extends SQLiteOpenHelper implements INotContextSupport {
     protected LogUtils mLog;
 
     public BaseSQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -34,7 +34,7 @@ public class BaseSQLiteOpenHelper extends SQLiteOpenHelper implements BaseSuppor
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        mLog.i("onCreate");
+        mLog.i("create");
     }
 
     @Override
@@ -113,8 +113,8 @@ public class BaseSQLiteOpenHelper extends SQLiteOpenHelper implements BaseSuppor
     }
 
     @Override
-    public AppManager getAppManager(Context context) {
-        return getApp(context).getAppManager();
+    public HandlerManager getHandlerManager(Context context) {
+        return getApp(context).getHandlerManager();
     }
 
     @Override

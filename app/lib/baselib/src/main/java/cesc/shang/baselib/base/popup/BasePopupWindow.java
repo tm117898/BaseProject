@@ -32,7 +32,6 @@ public abstract class BasePopupWindow extends PopupWindow {
 
     public void release() {
         mActivity = null;
-        if (isShowing())
-            dismiss();
+        dismiss();
     }
 }

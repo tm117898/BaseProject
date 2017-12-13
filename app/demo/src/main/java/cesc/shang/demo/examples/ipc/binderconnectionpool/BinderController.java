@@ -5,9 +5,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.BaseContextSupport;
-import cesc.shang.baselib.support.BaseManager;
-import cesc.shang.baselib.support.utils.UtilsManager;
+import cesc.shang.baselib.support.manager.base.BaseController;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 import cesc.shang.utilslib.utils.util.ThreadUtils;
 
@@ -15,7 +13,7 @@ import cesc.shang.utilslib.utils.util.ThreadUtils;
  * Created by shanghaolongteng on 2017/7/16.
  */
 
-public class BinderController extends BaseManager {
+public class BinderController extends BaseController {
     public static final String BINDER_THREAD_NAME = "BinderActivity-thread";
     private LogUtils mLog;
     private Handler mWork;
@@ -28,11 +26,12 @@ public class BinderController extends BaseManager {
         mLog = getUtilsManager().getLogUtils(this.getClass().getSimpleName());
     }
 
-    private UtilsManager getUtilsManager() {
-        return mApp.getUtilsManager();
+    @Override
+    public void onDestroy() {
+        getThreadUtils().quitHandlerThread(mWork);
     }
 
-    public void onActivityCreate(final BaseContextSupport support) {
+    public void onActivityCreate(final cesc.shang.baselib.support.IContextSupport support) {
         printProgressAndThread();
         mWork = getThreadUtils().getHandlerThread(BINDER_THREAD_NAME);
         mWork.post(new Runnable() {

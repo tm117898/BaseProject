@@ -87,9 +87,9 @@ public class HorizontalViewGroup extends BaseViewGroup {
                     mScroller.abortAnimation();
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (mTouchUtils.isScroll()) {
-                    float moveTagX = getScrollX() - mTouchUtils.getMoveX();
-                    float moveX = -mTouchUtils.getMoveX();
+                if (mTouchHelper.isScroll()) {
+                    float moveTagX = getScrollX() - mTouchHelper.getMoveX();
+                    float moveX = -mTouchHelper.getMoveX();
                     if (mMinX > moveTagX) {
                         moveX *= OVER_PULL_COEFFICIENT;
 //                        scrollTo(mMinX, 0);
@@ -105,8 +105,8 @@ public class HorizontalViewGroup extends BaseViewGroup {
                 int curX = getScrollX();
                 int childCount = getChildCount();
 
-                if (mTouchUtils.isFling()) {
-                    float moveX = mTouchUtils.getLastX() - mTouchUtils.getFirstX();
+                if (mTouchHelper.isFling()) {
+                    float moveX = mTouchHelper.getLastX() - mTouchHelper.getFirstX();
 
                     for (int i = 0; i < childCount; i++) {
                         View child = getChildAt(i);
@@ -125,7 +125,7 @@ public class HorizontalViewGroup extends BaseViewGroup {
                             break;
                         }
                     }
-                } else if (mTouchUtils.isScroll()) {
+                } else if (mTouchHelper.isScroll()) {
                     for (int i = 0; i < childCount; i++) {
                         View child = getChildAt(i);
                         float childX = child.getX();

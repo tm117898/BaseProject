@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cesc.shang.baselib.support.callback.IGetDataSuccessCallBack;
+import cesc.shang.baselib.support.callback.ISuccessCallBack;
 import cesc.shang.demo.R;
 import cesc.shang.demo.base.DemoBaseActivity;
 
@@ -66,7 +66,7 @@ public class SocketActivity extends DemoBaseActivity {
         }
     }
 
-    private IGetDataSuccessCallBack mCallBack = new IGetDataSuccessCallBack<String>() {
+    private ISuccessCallBack mCallBack = new ISuccessCallBack<String>() {
         @Override
         public void onSuccess(String s) {
             showMessage(s);

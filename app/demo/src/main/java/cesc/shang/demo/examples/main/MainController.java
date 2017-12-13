@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.BaseManager;
-import cesc.shang.baselib.support.callback.IGetDataSuccessCallBack;
+import cesc.shang.baselib.support.manager.base.BaseController;
+import cesc.shang.baselib.support.callback.ISuccessCallBack;
 import cesc.shang.demo.examples.activitywwitchorder.ActivitySwitchOrderActivity1;
 import cesc.shang.demo.examples.animation.AnimationActivity;
 import cesc.shang.demo.examples.customxmlarrt.CustomXmlArrtActivity;
@@ -32,12 +32,17 @@ import cesc.shang.demo.examples.window.WindowActivity;
  * Created by shanghaolongteng on 2017/7/16.
  */
 
-public class MainController extends BaseManager {
+public class MainController extends BaseController {
     public MainController(BaseApplication app) {
         super(app);
     }
 
-    public void initData(final IGetDataSuccessCallBack<List<MainActivityListEntity>> callBack) {
+    @Override
+    public void onDestroy() {
+
+    }
+
+    public void initData(final ISuccessCallBack<List<MainActivityListEntity>> callBack) {
         new Thread() {
             @Override
             public void run() {

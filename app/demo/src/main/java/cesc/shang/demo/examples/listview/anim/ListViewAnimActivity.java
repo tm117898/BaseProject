@@ -30,10 +30,7 @@ public class ListViewAnimActivity extends DemoBaseActivity {
 
         LayoutAnimationController controller = new LayoutAnimationController(AnimationUtils.loadAnimation(this, R.anim.switch_view_in_anim));
         mListView.setLayoutAnimation(controller);
-    }
 
-    @Override
-    public void setAdapter() {
         mAdapter = new ListViewAnimActivityListAdapter(this);
         mListView.setAdapter(mAdapter);
     }

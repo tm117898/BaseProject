@@ -9,7 +9,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnItemClick;
-import cesc.shang.baselib.support.callback.IGetDataSuccessCallBack;
+import cesc.shang.baselib.support.callback.ISuccessCallBack;
 import cesc.shang.demo.R;
 import cesc.shang.demo.base.DemoBaseActivity;
 
@@ -28,7 +28,7 @@ public class MainActivity extends DemoBaseActivity {
     }
 
     @Override
-    public void setAdapter() {
+    public void setupView() {
         mAdapter = new MainActivityListAdapter(this);
         mListView.setAdapter(mAdapter);
     }
@@ -36,7 +36,7 @@ public class MainActivity extends DemoBaseActivity {
     @Override
     public void initData() {
         super.initData();
-        getControllerManager().getMainController().initData(new IGetDataSuccessCallBack<List<MainActivityListEntity>>() {
+        getControllerManager().getMainController().initData(new ISuccessCallBack<List<MainActivityListEntity>>() {
             @Override
             public void onSuccess(final List<MainActivityListEntity> list) {
                 runOnUiThread(new Runnable() {

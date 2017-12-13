@@ -4,9 +4,9 @@ import android.content.ComponentName;
 import android.os.IBinder;
 import android.os.RemoteException;
 
-import cesc.shang.baselib.base.service.ServiceBindBaseHelper;
-import cesc.shang.baselib.support.BaseContextSupport;
-import cesc.shang.baselib.support.utils.UtilsManager;
+import cesc.shang.baselib.base.service.ServiceBindHelper;
+import cesc.shang.baselib.support.IContextSupport;
+import cesc.shang.baselib.support.manager.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**
@@ -14,11 +14,11 @@ import cesc.shang.utilslib.utils.debug.LogUtils;
  */
 public class BinderPool {
     protected LogUtils mLog;
-    private BaseContextSupport mSupport = null;
-    private ServiceBindBaseHelper mHelper;
+    private IContextSupport mSupport = null;
+    private ServiceBindHelper mHelper;
     private BinderConnectionPool mConnectionPool = null;
 
-    public BinderPool(BaseContextSupport support) {
+    public BinderPool(IContextSupport support) {
         mSupport = support;
         onCreate();
     }
@@ -26,7 +26,7 @@ public class BinderPool {
     private synchronized void onCreate() {
         mLog = getUtilsManager().getLogUtils(this.getClass().getSimpleName());
 
-        mHelper = new ServiceBindBaseHelper(mSupport) {
+        mHelper = new ServiceBindHelper(mSupport) {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
                 mConnectionPool = BinderConnectionPool.Stub.asInterface(iBinder);

@@ -20,7 +20,7 @@ import android.graphics.Camera;
 import android.graphics.Matrix;
 import android.view.animation.Transformation;
 
-import cesc.shang.baselib.support.BaseContextSupport;
+import cesc.shang.baselib.support.IContextSupport;
 
 /**
  * An animation that rotates the view on the Y axis between two specified angles.
@@ -50,7 +50,7 @@ public class Rotate3dAnimation extends BaseAnimation {
      * @param centerY     the Y center of the 3D rotation
      * @param reverse     true if the translation should be reversed, false otherwise
      */
-    public Rotate3dAnimation(BaseContextSupport support,
+    public Rotate3dAnimation(IContextSupport support,
                              float fromDegrees, float toDegrees, float centerX, float centerY, float depthZ, boolean reverse) {
         super(support);
         mFromDegrees = fromDegrees;

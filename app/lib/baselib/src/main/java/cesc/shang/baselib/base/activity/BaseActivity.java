@@ -10,18 +10,17 @@ import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import cesc.shang.baselib.base.fragment.BaseFragment;
-import cesc.shang.baselib.support.BaseContextSupport;
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.controller.ControllerManager;
-import cesc.shang.baselib.support.manager.AppManager;
-import cesc.shang.baselib.support.utils.UtilsManager;
+import cesc.shang.baselib.base.fragment.BaseFragment;
+import cesc.shang.baselib.support.manager.ControllerManager;
+import cesc.shang.baselib.support.manager.HandlerManager;
+import cesc.shang.baselib.support.manager.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**
  * Created by shanghaolongteng on 2016/7/14.
  */
-public abstract class BaseActivity extends FragmentActivity implements BaseContextSupport {
+public abstract class BaseActivity extends FragmentActivity implements cesc.shang.baselib.support.IContextSupport {
     protected LogUtils mLog;
     protected Unbinder mButterKnife;
 
@@ -30,19 +29,15 @@ public abstract class BaseActivity extends FragmentActivity implements BaseConte
         super.onCreate(savedInstanceState);
         setContentView(getContentViewId());
         mLog = getUtilsManager().getLogUtils(this.getClass().getSimpleName());
-        mLog.i("onCreate()");
+        mLog.i("create()");
         mButterKnife = ButterKnife.bind(this);
         setupView();
-        setAdapter();
         initData();
     }
 
     public abstract int getContentViewId();
 
     public void setupView() {
-    }
-
-    public void setAdapter() {
     }
 
     public void initData() {
@@ -69,7 +64,7 @@ public abstract class BaseActivity extends FragmentActivity implements BaseConte
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mLog.i("onDestroy()");
+        mLog.i("destroy()");
         mButterKnife.unbind();
     }
 
@@ -108,8 +103,8 @@ public abstract class BaseActivity extends FragmentActivity implements BaseConte
     }
 
     @Override
-    public AppManager getAppManager() {
-        return getApp().getAppManager();
+    public HandlerManager getHandlerManager() {
+        return getApp().getHandlerManager();
     }
 
     @Override

@@ -9,6 +9,6 @@ import cesc.shang.demo.controller.AppController;
 
 public abstract class DemoBaseActivity extends BaseActivity {
     public AppController getControllerManager() {
-        return (AppController) getApp().getControllerManager();
+        return (AppController) super.getControllerManager();
     }
 }

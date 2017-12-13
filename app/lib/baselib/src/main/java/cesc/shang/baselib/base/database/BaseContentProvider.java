@@ -6,30 +6,29 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
-import cesc.shang.baselib.support.BaseContextSupport;
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.controller.ControllerManager;
-import cesc.shang.baselib.support.manager.AppManager;
-import cesc.shang.baselib.support.utils.UtilsManager;
+import cesc.shang.baselib.support.manager.ControllerManager;
+import cesc.shang.baselib.support.manager.HandlerManager;
+import cesc.shang.baselib.support.manager.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**
  * Created by shanghaolongteng on 2016/7/31.
  */
-public class BaseContentProvider extends ContentProvider implements BaseContextSupport {
+public class BaseContentProvider extends ContentProvider implements cesc.shang.baselib.support.IContextSupport {
     protected LogUtils mLog;
 
     @Override
     public boolean onCreate() {
         mLog = getUtilsManager().getLogUtils(this.getClass().getSimpleName());
-        mLog.i("onCreate");
+        mLog.i("create");
         return false;
     }
 
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        mLog.i("onCreate , uri : ", uri,
+        mLog.i("create , uri : ", uri,
                 " , projection : " + projection,
                 " , selection : " + selection,
                 " , selectionArgs : " + selectionArgs,
@@ -40,21 +39,21 @@ public class BaseContentProvider extends ContentProvider implements BaseContextS
     @Nullable
     @Override
     public String getType(Uri uri) {
-        mLog.i("onCreate , uri : ", uri);
+        mLog.i("create , uri : ", uri);
         return null;
     }
 
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        mLog.i("onCreate , uri : ", uri,
+        mLog.i("create , uri : ", uri,
                 " , values : " + values);
         return null;
     }
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        mLog.i("onCreate , uri : ", uri,
+        mLog.i("create , uri : ", uri,
                 " , selection : " + selection,
                 " , selectionArgs : " + selectionArgs);
         return 0;
@@ -62,7 +61,7 @@ public class BaseContentProvider extends ContentProvider implements BaseContextS
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        mLog.i("onCreate , uri : ", uri,
+        mLog.i("create , uri : ", uri,
                 " , values : " + values,
                 " , selection : " + selection,
                 " , selectionArgs : " + selectionArgs);
@@ -80,8 +79,8 @@ public class BaseContentProvider extends ContentProvider implements BaseContextS
     }
 
     @Override
-    public AppManager getAppManager() {
-        return getApp().getAppManager();
+    public HandlerManager getHandlerManager() {
+        return getApp().getHandlerManager();
     }
 
     @Override

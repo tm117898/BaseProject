@@ -7,9 +7,9 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.BaseManager;
 import cesc.shang.baselib.support.callback.IHttpCallBack;
-import cesc.shang.baselib.support.manager.HttpManager;
+import cesc.shang.baselib.support.handler.HttpHandler;
+import cesc.shang.baselib.support.manager.base.BaseController;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 import cesc.shang.utilslib.utils.file.XmlUtils;
 
@@ -17,7 +17,7 @@ import cesc.shang.utilslib.utils.file.XmlUtils;
  * Created by Cesc Shang on 2017/7/17.
  */
 
-public class OkHttpController extends BaseManager {
+public class OkHttpController extends BaseController {
     public static final String GET_URL = "http://ws.webxml.com.cn/WebServices/WeatherWS.asmx/getWeather?theCityCode=937&theUserID=";
     public static final String POST_URL = "http://gc.ditu.aliyun.com/geocoding?a=%E6%B5%8E%E5%8D%97";
 
@@ -25,26 +25,31 @@ public class OkHttpController extends BaseManager {
 
     public OkHttpController(BaseApplication app) {
         super(app);
-        mLog = mApp.getUtilsManager().getLogUtils(this.getClass().getSimpleName());
+        mLog = getUtilsManager().getLogUtils(this.getClass().getSimpleName());
+    }
+
+    @Override
+    public void onDestroy() {
+
     }
 
     public void get() {
-        HttpManager http = mApp.getAppManager().getHttpManager();
-        http.get(mApp, GET_URL, String.class, new IHttpCallBack<String>() {
+        HttpHandler http = getHandlerManager().getHttpManager();
+        http.get(getApp(), GET_URL, String.class, new IHttpCallBack<String>() {
             @Override
             public void onNetworkDisconnected() {
                 mLog.i("get , onNetworkDisconnected()");
             }
 
             @Override
-            public void onFailure() {
-                mLog.i("get , onFailure()");
+            public void onFail() {
+                mLog.i("get , onFail()");
             }
 
             @Override
             public void onSuccess(String s) {
                 try {
-                    mApp.getUtilsManager().getXmlUtils().parse(new ByteArrayInputStream(s.getBytes()), new XmlUtils.CallBack() {
+                    getUtilsManager().getXmlUtils().parse(new ByteArrayInputStream(s.getBytes()), new XmlUtils.CallBack() {
                         @Override
                         public void startDocument() {
                             mLog.i("convertEntity , startDocument : ");
@@ -74,11 +79,11 @@ public class OkHttpController extends BaseManager {
     }
 
     public void post() {
-        HttpManager http = mApp.getAppManager().getHttpManager();
-        http.post(mApp, POST_URL, null, OkHttpEntity.class, new IHttpCallBack<OkHttpEntity>() {
+        HttpHandler http = getHandlerManager().getHttpManager();
+        http.post(getApp(), POST_URL, null, OkHttpEntity.class, new IHttpCallBack<OkHttpEntity>() {
             @Override
-            public void onFailure() {
-                mLog.i("post , onFailure()");
+            public void onFail() {
+                mLog.i("post , onFail()");
             }
 
             @Override

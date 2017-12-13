@@ -5,25 +5,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
-import cesc.shang.baselib.support.BaseContextSupport;
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.controller.ControllerManager;
-import cesc.shang.baselib.support.manager.AppManager;
-import cesc.shang.baselib.support.utils.UtilsManager;
+import cesc.shang.baselib.support.manager.ControllerManager;
+import cesc.shang.baselib.support.manager.HandlerManager;
+import cesc.shang.baselib.support.manager.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**
  * Created by shanghaolongteng on 2017/7/15.
  */
 
-public class BaseService extends Service implements BaseContextSupport {
+public class BaseService extends Service implements cesc.shang.baselib.support.IContextSupport {
     protected LogUtils mLog;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mLog = getUtilsManager().getLogUtils(this.getClass().getSimpleName());
-        mLog.i("onCreate");
+        mLog.i("create");
     }
 
     @Override
@@ -53,7 +52,7 @@ public class BaseService extends Service implements BaseContextSupport {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mLog.i("onDestroy");
+        mLog.i("destroy");
     }
 
     @Override
@@ -84,8 +83,8 @@ public class BaseService extends Service implements BaseContextSupport {
     }
 
     @Override
-    public AppManager getAppManager() {
-        return getApp().getAppManager();
+    public HandlerManager getHandlerManager() {
+        return getApp().getHandlerManager();
     }
 
     @Override

@@ -1,7 +1,7 @@
 package cesc.shang.demo.controller;
 
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.controller.ControllerManager;
+import cesc.shang.baselib.support.manager.ControllerManager;
 import cesc.shang.demo.examples.ipc.aidl.AIDLController;
 import cesc.shang.demo.examples.ipc.binderconnectionpool.BinderController;
 import cesc.shang.demo.examples.ipc.socket.SocketController;
@@ -27,44 +27,49 @@ public class AppController extends ControllerManager {
     public void onDestroy() {
         super.onDestroy();
 
+        destroyManager(mMain);
         mMain = null;
+        destroyManager(mBinder);
         mBinder = null;
+        destroyManager(mAidl);
         mAidl = null;
+        destroyManager(mSocket);
         mSocket = null;
+        destroyManager(mOkHttp);
         mOkHttp = null;
     }
 
     public MainController getMainController() {
         if (mMain == null) {
-            mMain = new MainController(mApp);
+            mMain = new MainController(getApp());
         }
         return mMain;
     }
 
     public BinderController getBinderController() {
         if (mBinder == null) {
-            mBinder = new BinderController(mApp);
+            mBinder = new BinderController(getApp());
         }
         return mBinder;
     }
 
     public AIDLController getAIDLController() {
         if (mAidl == null) {
-            mAidl = new AIDLController(mApp);
+            mAidl = new AIDLController(getApp());
         }
         return mAidl;
     }
 
     public SocketController getSocketController() {
         if (mSocket == null) {
-            mSocket = new SocketController(mApp);
+            mSocket = new SocketController(getApp());
         }
         return mSocket;
     }
 
     public OkHttpController getOkHttpController() {
         if (mOkHttp == null) {
-            mOkHttp = new OkHttpController(mApp);
+            mOkHttp = new OkHttpController(getApp());
         }
         return mOkHttp;
     }

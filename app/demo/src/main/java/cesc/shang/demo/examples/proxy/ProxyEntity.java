@@ -1,10 +1,9 @@
 package cesc.shang.demo.examples.proxy;
 
 import android.os.Parcel;
-import android.support.annotation.NonNull;
 
 import cesc.shang.baselib.base.entity.BaseEntity;
-import cesc.shang.baselib.support.BaseContextSupport;
+import cesc.shang.baselib.support.IContextSupport;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**
@@ -15,7 +14,7 @@ public class ProxyEntity extends BaseEntity implements Comparable {
     private LogUtils mLog;
     private int mId;
 
-    public ProxyEntity(BaseContextSupport support, int id) {
+    public ProxyEntity(IContextSupport support, int id) {
         mLog = support.getUtilsManager().getLogUtils(getClass().getSimpleName());
         this.mId = id;
     }

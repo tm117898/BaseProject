@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import cesc.shang.baselib.base.adapter.AdapterViewBaseAdapter;
-import cesc.shang.baselib.support.BaseContextSupport;
+import cesc.shang.baselib.support.IContextSupport;
 import cesc.shang.demo.R;
 
 /**
@@ -12,7 +12,7 @@ import cesc.shang.demo.R;
  */
 public class MainActivityListAdapter extends AdapterViewBaseAdapter<MainActivityListEntity, MainActivityListAdapter.VH> {
 
-    public MainActivityListAdapter(BaseContextSupport support) {
+    public MainActivityListAdapter(IContextSupport support) {
         super(support);
     }
 

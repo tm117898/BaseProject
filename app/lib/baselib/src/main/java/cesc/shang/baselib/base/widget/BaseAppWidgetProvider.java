@@ -9,16 +9,15 @@ import android.os.Bundle;
 import android.widget.RemoteViews;
 
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.BaseSupport;
-import cesc.shang.baselib.support.controller.ControllerManager;
-import cesc.shang.baselib.support.manager.AppManager;
-import cesc.shang.baselib.support.utils.UtilsManager;
+import cesc.shang.baselib.support.INotContextSupport;
+import cesc.shang.baselib.support.manager.HandlerManager;
+import cesc.shang.baselib.support.manager.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**
  * Created by shanghaolongteng on 2016/8/10.
  */
-public abstract class BaseAppWidgetProvider extends AppWidgetProvider implements BaseSupport {
+public abstract class BaseAppWidgetProvider extends AppWidgetProvider implements INotContextSupport {
     protected LogUtils mLog;
 
     @Override
@@ -103,8 +102,8 @@ public abstract class BaseAppWidgetProvider extends AppWidgetProvider implements
     }
 
     @Override
-    public AppManager getAppManager(Context context) {
-        return getApp(context).getAppManager();
+    public HandlerManager getHandlerManager(Context context) {
+        return getApp(context).getHandlerManager();
     }
 
     @Override

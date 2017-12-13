@@ -5,7 +5,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import cesc.shang.baselib.base.adapter.AdapterViewBaseAdapter;
-import cesc.shang.baselib.support.BaseContextSupport;
+import cesc.shang.baselib.support.IContextSupport;
 import cesc.shang.demo.R;
 import cesc.shang.demo.examples.listview.anim.ListEntity;
 
@@ -14,7 +14,7 @@ import cesc.shang.demo.examples.listview.anim.ListEntity;
  */
 public class ListViewChoiceModelActivityListAdapter extends AdapterViewBaseAdapter<ListEntity, ListViewChoiceModelActivityListAdapter.VH> {
 
-    public ListViewChoiceModelActivityListAdapter(BaseContextSupport support) {
+    public ListViewChoiceModelActivityListAdapter(IContextSupport support) {
         super(support);
     }
 

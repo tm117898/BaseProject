@@ -5,15 +5,14 @@ import android.content.Intent;
 import cesc.shang.baselib.base.application.BaseApplication;
 import cesc.shang.baselib.base.socket.BaseSocketClient;
 import cesc.shang.baselib.base.socket.SocketClientListener;
-import cesc.shang.baselib.support.BaseContextSupport;
-import cesc.shang.baselib.support.BaseManager;
-import cesc.shang.baselib.support.callback.IGetDataSuccessCallBack;
+import cesc.shang.baselib.support.callback.ISuccessCallBack;
+import cesc.shang.baselib.support.manager.base.BaseController;
 
 /**
  * Created by shanghaolongteng on 2017/7/16.
  */
 
-public class SocketController extends BaseManager {
+public class SocketController extends BaseController {
     private BaseSocketClient<String> mUser1 = null;
     private BaseSocketClient<String> mUser2 = null;
 
@@ -21,17 +20,23 @@ public class SocketController extends BaseManager {
         super(app);
     }
 
-    public void onActivityCreate(BaseContextSupport support) {
+    @Override
+    public void onDestroy() {
+        user1OffLine();
+        user2OffLine();
+    }
+
+    public void onActivityCreate(cesc.shang.baselib.support.IContextSupport support) {
         support.getContext().startService(new Intent(support.getContext(), SocketService.class));
     }
 
-    public void onActivityDestroy(BaseContextSupport support) {
+    public void onActivityDestroy(cesc.shang.baselib.support.IContextSupport support) {
         support.getContext().stopService(new Intent(support.getContext(), SocketService.class));
         mUser1 = mUser2 = null;
     }
 
-    public void user1OnLine(final IGetDataSuccessCallBack<String> callBack) {
-        mUser1 = new BaseSocketClient<String>(mApp, "localhost", 7898, "1", new SocketClientListener() {
+    public void user1OnLine(final ISuccessCallBack<String> callBack) {
+        mUser1 = new BaseSocketClient<String>(getApp(), "localhost", 7898, "1", new SocketClientListener() {
             @Override
             public void register(Object key, BaseSocketClient client) {
             }
@@ -60,8 +65,8 @@ public class SocketController extends BaseManager {
         }
     }
 
-    public void user2OnLine(final IGetDataSuccessCallBack<String> callBack) {
-        mUser2 = new BaseSocketClient<String>(mApp, "localhost", 7898, "2", new SocketClientListener() {
+    public void user2OnLine(final ISuccessCallBack<String> callBack) {
+        mUser2 = new BaseSocketClient<String>(getApp(), "localhost", 7898, "2", new SocketClientListener() {
             @Override
             public void register(Object key, BaseSocketClient client) {
 

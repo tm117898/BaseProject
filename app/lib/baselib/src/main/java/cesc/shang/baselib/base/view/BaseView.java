@@ -8,19 +8,17 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.BaseContextSupport;
-import cesc.shang.baselib.support.controller.ControllerManager;
-import cesc.shang.baselib.support.manager.AppManager;
-import cesc.shang.baselib.support.utils.UtilsManager;
+import cesc.shang.baselib.support.manager.ControllerManager;
+import cesc.shang.baselib.support.manager.HandlerManager;
+import cesc.shang.baselib.support.manager.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
-import cesc.shang.utilslib.utils.widget.ViewTouchUtils;
 
 /**
  * Created by shanghaolongteng on 2016/8/5.
  */
-public abstract class BaseView extends View implements BaseContextSupport {
+public abstract class BaseView extends View implements cesc.shang.baselib.support.IContextSupport {
     protected LogUtils mLog;
-    protected ViewTouchUtils mTouchUtils = null;
+    protected ViewTouchHelper mTouchHelper = null;
 
     public BaseView(Context context) {
         this(context, null);
@@ -86,7 +84,7 @@ public abstract class BaseView extends View implements BaseContextSupport {
         super.onAttachedToWindow();
 
         if (enableTouchUtils()) {
-            mTouchUtils = getUtilsManager().getViewTouchUtils(getContext());
+            mTouchHelper = new ViewTouchHelper(getContext());
         }
     }
 
@@ -96,8 +94,8 @@ public abstract class BaseView extends View implements BaseContextSupport {
         super.onDetachedFromWindow();
 
         if (enableTouchUtils()) {
-            mTouchUtils.destroy();
-            mTouchUtils = null;
+            mTouchHelper.destroy();
+            mTouchHelper = null;
         }
     }
 
@@ -127,7 +125,7 @@ public abstract class BaseView extends View implements BaseContextSupport {
     public final boolean onTouchEvent(MotionEvent event) {
         mLog.i("onTouchEvent , event : ", event.getAction(), " , event.getX() : ", event.getX(), " , event.getY() : ", event.getY());
         if (enableTouchUtils()) {
-            mTouchUtils.onTouchEvent(event);
+            mTouchHelper.onTouchEvent(event);
         }
         return onTouchingEvent(event);
     }
@@ -147,8 +145,8 @@ public abstract class BaseView extends View implements BaseContextSupport {
     }
 
     @Override
-    public AppManager getAppManager() {
-        return getApp().getAppManager();
+    public HandlerManager getHandlerManager() {
+        return getApp().getHandlerManager();
     }
 
     @Override

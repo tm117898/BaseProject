@@ -8,18 +8,18 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import cesc.shang.baselib.support.BaseContextSupport;
+import cesc.shang.baselib.support.IContextSupport;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 
 /**
  * Created by shanghaolongteng on 2016/8/8.
  */
-public abstract class RecyclerViewBaseAdapter<T, E extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<E> {
+public abstract class RecyclerViewBaseAdapter<T, U extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<U> {
     protected LogUtils mLog;
     private List<T> mList = new ArrayList<>();
 
-    public RecyclerViewBaseAdapter(BaseContextSupport support) {
+    public RecyclerViewBaseAdapter(IContextSupport support) {
         mLog = support.getUtilsManager().getLogUtils(this.getClass().getSimpleName());
     }
 
@@ -41,7 +41,7 @@ public abstract class RecyclerViewBaseAdapter<T, E extends RecyclerView.ViewHold
     }
 
     @Override
-    public E onCreateViewHolder(ViewGroup parent, int viewType) {
+    public U onCreateViewHolder(ViewGroup parent, int viewType) {
         View convertView = LayoutInflater.from(parent.getContext()).inflate(getViewLayoutId(viewType), null, false);
         onConvertViewCreate(convertView, viewType);
         return getViewHolder(convertView, viewType);
@@ -49,16 +49,16 @@ public abstract class RecyclerViewBaseAdapter<T, E extends RecyclerView.ViewHold
 
     public abstract int getViewLayoutId(int viewType);
 
-    public abstract E getViewHolder(View convertView, int viewType);
+    public abstract U getViewHolder(View convertView, int viewType);
 
     public void onConvertViewCreate(View convertView, int viewType) {
     }
 
     @Override
-    public void onBindViewHolder(E holder, int position) {
+    public void onBindViewHolder(U holder, int position) {
         T t = mList.get(position);
         bindData(t, holder, getItemViewType(position));
     }
 
-    public abstract void bindData(T t, E e, int viewType);
+    public abstract void bindData(T t, U u, int viewType);
 }

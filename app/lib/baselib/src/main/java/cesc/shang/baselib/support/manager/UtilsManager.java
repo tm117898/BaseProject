@@ -1,6 +1,5 @@
-package cesc.shang.baselib.support.utils;
+package cesc.shang.baselib.support.manager;
 
-import android.content.Context;
 import android.os.Build;
 import android.util.ArrayMap;
 
@@ -9,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.BaseManager;
+import cesc.shang.baselib.support.manager.base.BaseManager;
 import cesc.shang.utilslib.utils.debug.DebugUtils;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 import cesc.shang.utilslib.utils.debug.ProcessUtils;
@@ -39,7 +38,6 @@ import cesc.shang.utilslib.utils.widget.ActivityUtils;
 import cesc.shang.utilslib.utils.widget.AnimUtils;
 import cesc.shang.utilslib.utils.widget.BitmapUtils;
 import cesc.shang.utilslib.utils.widget.NotifyUtils;
-import cesc.shang.utilslib.utils.widget.ViewTouchUtils;
 import cesc.shang.utilslib.utils.widget.ViewUtils;
 
 /**
@@ -79,18 +77,17 @@ public class UtilsManager extends BaseManager {
     protected AnimUtils mAnimUtils;
     protected BitmapUtils mBitmapUtils;
     protected NotifyUtils mNotifyUtils;
-    protected ViewTouchUtils mViewTouchUtils;
     protected ViewUtils mViewUtils;
 
-    protected OkHttpUtils mOkhttpUtils;
+    protected OkHttpUtils mOkHttpUtils;
 
     public UtilsManager(BaseApplication app) {
         super(app);
     }
 
     @Override
-    public void onCreate(BaseApplication app) {
-        super.onCreate(app);
+    public void create(BaseApplication app) {
+        super.create(app);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             mLogUtils = new ArrayMap<>();
@@ -101,8 +98,6 @@ public class UtilsManager extends BaseManager {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
-
         mLogUtils.clear();
     }
 
@@ -306,13 +301,6 @@ public class UtilsManager extends BaseManager {
         return mNotifyUtils;
     }
 
-    public ViewTouchUtils getViewTouchUtils(Context context) {
-        if (mViewTouchUtils == null) {
-            mViewTouchUtils = new ViewTouchUtils(context);
-        }
-        return mViewTouchUtils;
-    }
-
     public ViewUtils getViewUtils() {
         if (mViewUtils == null) {
             mViewUtils = new ViewUtils();
@@ -321,9 +309,9 @@ public class UtilsManager extends BaseManager {
     }
 
     public OkHttpUtils getOkHttpUtils() {
-        if (mOkhttpUtils == null) {
-            mOkhttpUtils = new OkHttpUtils();
+        if (mOkHttpUtils == null) {
+            mOkHttpUtils = new OkHttpUtils();
         }
-        return mOkhttpUtils;
+        return mOkHttpUtils;
     }
 }

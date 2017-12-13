@@ -1,4 +1,4 @@
-package cesc.shang.utilslib.utils.widget;
+package cesc.shang.baselib.base.view;
 
 import android.content.Context;
 import android.view.MotionEvent;
@@ -8,7 +8,7 @@ import android.view.ViewConfiguration;
 /**
  * Created by shanghaolongteng on 2016/8/7.
  */
-public class ViewTouchUtils {
+public class ViewTouchHelper {
     private int mPagingTouchSlop;
     private int mMinimumFlingVelocity;
     private int mMaximumFlingVelocity;
@@ -21,7 +21,7 @@ public class ViewTouchUtils {
 
     private boolean mIsFling = false, mIsScroll = false;
 
-    public ViewTouchUtils(Context context) {
+    public ViewTouchHelper(Context context) {
         ViewConfiguration configuration = ViewConfiguration.get(context);
         mPagingTouchSlop = configuration.getScaledPagingTouchSlop();
         mMinimumFlingVelocity = configuration.getScaledMinimumFlingVelocity();

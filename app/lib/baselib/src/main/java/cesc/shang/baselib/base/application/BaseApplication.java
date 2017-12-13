@@ -2,18 +2,17 @@ package cesc.shang.baselib.base.application;
 
 import android.content.Context;
 
-import cesc.shang.baselib.support.BaseContextSupport;
-import cesc.shang.baselib.support.controller.ControllerManager;
-import cesc.shang.baselib.support.manager.AppManager;
-import cesc.shang.baselib.support.utils.UtilsManager;
+import cesc.shang.baselib.support.manager.ControllerManager;
+import cesc.shang.baselib.support.manager.HandlerManager;
+import cesc.shang.baselib.support.manager.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**
  * Created by shanghaolongteng on 2016/7/14.
  */
-public abstract class BaseApplication<C extends ControllerManager, M extends AppManager, U extends UtilsManager> extends MultiDexApplication implements BaseContextSupport {
+public abstract class BaseApplication<C extends ControllerManager, H extends HandlerManager, U extends UtilsManager> extends MultiDexApplication implements cesc.shang.baselib.support.IContextSupport {
     protected C c;
-    protected M m;
+    protected H h;
     protected U u;
     protected LogUtils mLog;
 
@@ -22,7 +21,7 @@ public abstract class BaseApplication<C extends ControllerManager, M extends App
         super.onCreate();
         initSupport();
         mLog = u.getLogUtils(getClass().getSimpleName());
-        mLog.i("onCreate()");
+        mLog.i("create()");
         initDebug();
     }
 
@@ -45,16 +44,16 @@ public abstract class BaseApplication<C extends ControllerManager, M extends App
     }
 
     protected void initSupport() {
-        c = initAppController();
-        m = initAppManager();
+        c = initControllerManager();
+        h = initHandlerManager();
         u = initUtilsManager();
     }
 
     protected abstract U initUtilsManager();
 
-    protected abstract M initAppManager();
+    protected abstract H initHandlerManager();
 
-    protected abstract C initAppController();
+    protected abstract C initControllerManager();
 
     protected void initDebug() {
         Thread.UncaughtExceptionHandler handler = getCrashHandler();
@@ -85,8 +84,8 @@ public abstract class BaseApplication<C extends ControllerManager, M extends App
     }
 
     @Override
-    public M getAppManager() {
-        return m;
+    public H getHandlerManager() {
+        return h;
     }
 
     @Override

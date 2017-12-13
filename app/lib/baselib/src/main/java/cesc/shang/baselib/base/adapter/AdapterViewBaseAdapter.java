@@ -8,18 +8,18 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import cesc.shang.baselib.support.BaseContextSupport;
+import cesc.shang.baselib.support.IContextSupport;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**
  * Created by shanghaolongteng on 2016/7/14.
  */
-public abstract class AdapterViewBaseAdapter<T, E extends AdapterViewBaseAdapter.ViewHolder> extends BaseAdapter {
+public abstract class AdapterViewBaseAdapter<T, U extends AdapterViewBaseAdapter.ViewHolder> extends BaseAdapter {
     public static final int ITEM_VIEW_LAYOUT_INVALID_ID = 0;
     protected LogUtils mLog;
     private List<T> mList = new ArrayList<>();
 
-    public AdapterViewBaseAdapter(BaseContextSupport support) {
+    public AdapterViewBaseAdapter(IContextSupport support) {
         mLog = support.getUtilsManager().getLogUtils(this.getClass().getSimpleName());
     }
 
@@ -53,7 +53,7 @@ public abstract class AdapterViewBaseAdapter<T, E extends AdapterViewBaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         int viewType = getItemViewType(position);
-        E e;
+        U u;
         if (convertView == null) {
             int layoutId = getViewLayoutId(viewType);
             if (layoutId == ITEM_VIEW_LAYOUT_INVALID_ID) {
@@ -61,17 +61,17 @@ public abstract class AdapterViewBaseAdapter<T, E extends AdapterViewBaseAdapter
             } else {
                 convertView = LayoutInflater.from(parent.getContext()).inflate(layoutId, null, false);
             }
-            e = getViewHolder(convertView, viewType);
-            convertView.setTag(e);
+            u = getViewHolder(convertView, viewType);
+            convertView.setTag(u);
             onConvertViewCreate(convertView, viewType);
         } else {
-            e = (E) convertView.getTag();
+            u = (U) convertView.getTag();
         }
 
         T t = mList.get(position);
-        e.entity = t;
+        u.entity = t;
 
-        bindData(t, e, viewType);
+        bindData(t, u, viewType);
 
         return convertView;
     }
@@ -85,9 +85,9 @@ public abstract class AdapterViewBaseAdapter<T, E extends AdapterViewBaseAdapter
         return null;
     }
 
-    public abstract E getViewHolder(View convertView, int viewType);
+    public abstract U getViewHolder(View convertView, int viewType);
 
-    public abstract void bindData(T t, E e, int viewType);
+    public abstract void bindData(T t, U u, int viewType);
 
     public static class ViewHolder<T> {
         public T entity;

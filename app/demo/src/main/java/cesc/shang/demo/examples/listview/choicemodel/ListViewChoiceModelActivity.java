@@ -24,7 +24,8 @@ public class ListViewChoiceModelActivity extends DemoBaseActivity {
     }
 
     @Override
-    public void setAdapter() {
+    public void setupView() {
+        super.setupView();
         mAdapter = new ListViewChoiceModelActivityListAdapter(this);
         mListView.setAdapter(mAdapter);
     }

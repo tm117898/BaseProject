@@ -6,25 +6,25 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
-import cesc.shang.baselib.support.BaseContextSupport;
+import cesc.shang.baselib.support.IContextSupport;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**
  * Created by shanghaolongteng on 2017/7/16.
  */
 
-public abstract class ServiceBindBaseHelper implements ServiceConnection {
+public abstract class ServiceBindHelper implements ServiceConnection {
     protected boolean isBind = false;
-    protected BaseContextSupport mSupport;
+    protected IContextSupport mSupport;
     protected LogUtils mLog;
 
-    public ServiceBindBaseHelper(BaseContextSupport support) {
+    public ServiceBindHelper(IContextSupport support) {
         onCreate(support);
     }
 
-    public void onCreate(BaseContextSupport support) {
+    public void onCreate(IContextSupport support) {
         mSupport = support;
-        mLog = support.getUtilsManager().getLogUtils(ServiceBindBaseHelper.class.getSimpleName());
+        mLog = support.getUtilsManager().getLogUtils(ServiceBindHelper.class.getSimpleName());
     }
 
     public void bindService(Class<?> service) {
@@ -45,7 +45,7 @@ public abstract class ServiceBindBaseHelper implements ServiceConnection {
     }
 
     public void onDestroy() {
-        mLog.i("onDestroy");
+        mLog.i("destroy");
         unbindService();
         mSupport = null;
     }
@@ -55,13 +55,13 @@ public abstract class ServiceBindBaseHelper implements ServiceConnection {
         public void onServiceConnected(ComponentName name, IBinder service) {
             isBind = true;
             mLog.i("onServiceConnected , name : ", name);
-            ServiceBindBaseHelper.this.onServiceConnected(name, service);
+            ServiceBindHelper.this.onServiceConnected(name, service);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
             mLog.i("onServiceDisconnected , name : ", name);
-            ServiceBindBaseHelper.this.onServiceDisconnected(name);
+            ServiceBindHelper.this.onServiceDisconnected(name);
             isBind = false;
         }
     };

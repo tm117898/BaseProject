@@ -1,9 +1,8 @@
 package cesc.shang.baselib.base.crash;
 
 import android.os.Process;
-import android.util.Log;
 
-import cesc.shang.baselib.support.BaseContextSupport;
+import cesc.shang.baselib.support.IContextSupport;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**
@@ -12,7 +11,7 @@ import cesc.shang.utilslib.utils.debug.LogUtils;
 public class BaseCrashHandler implements Thread.UncaughtExceptionHandler {
     protected LogUtils mLog;
 
-    public BaseCrashHandler(BaseContextSupport support) {
+    public BaseCrashHandler(IContextSupport support) {
         mLog = support.getUtilsManager().getLogUtils(getClass().getSimpleName());
     }
 

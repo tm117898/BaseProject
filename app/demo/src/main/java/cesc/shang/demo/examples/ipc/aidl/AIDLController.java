@@ -6,9 +6,8 @@ import android.os.RemoteException;
 
 import cesc.shang.baselib.base.activity.BaseActivity;
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.base.service.ServiceBindBaseHelper;
-import cesc.shang.baselib.support.BaseManager;
-import cesc.shang.baselib.support.utils.UtilsManager;
+import cesc.shang.baselib.base.service.ServiceBindHelper;
+import cesc.shang.baselib.support.manager.base.BaseController;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 import cesc.shang.utilslib.utils.util.ThreadUtils;
 
@@ -16,8 +15,8 @@ import cesc.shang.utilslib.utils.util.ThreadUtils;
  * Created by shanghaolongteng on 2017/7/16.
  */
 
-public class AIDLController extends BaseManager {
-    private ServiceBindBaseHelper mHelper;
+public class AIDLController extends BaseController {
+    private ServiceBindHelper mHelper;
     private AidlInterface mAIDL = null;
     private LogUtils mLog;
 
@@ -26,12 +25,13 @@ public class AIDLController extends BaseManager {
         mLog = getUtilsManager().getLogUtils(this.getClass().getSimpleName());
     }
 
-    private UtilsManager getUtilsManager() {
-        return mApp.getUtilsManager();
+    @Override
+    public void onDestroy() {
+
     }
 
     public void onActivityCreate(BaseActivity activity) {
-        mHelper = new ServiceBindBaseHelper(activity) {
+        mHelper = new ServiceBindHelper(activity) {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
                 mAIDL = AidlInterface.Stub.asInterface(iBinder);

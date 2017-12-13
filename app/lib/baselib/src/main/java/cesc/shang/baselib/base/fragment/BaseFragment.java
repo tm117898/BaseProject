@@ -2,7 +2,6 @@ package cesc.shang.baselib.base.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,16 +12,16 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.BaseContextSupport;
-import cesc.shang.baselib.support.manager.AppManager;
-import cesc.shang.baselib.support.utils.UtilsManager;
+import cesc.shang.baselib.support.manager.ControllerManager;
+import cesc.shang.baselib.support.manager.HandlerManager;
+import cesc.shang.baselib.support.manager.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**
  * Created by Cesc Shang on 2017/7/17.
  */
 
-public abstract class BaseFragment extends Fragment implements BaseContextSupport {
+public abstract class BaseFragment extends Fragment implements cesc.shang.baselib.support.IContextSupport {
     protected LogUtils mLog;
     protected Unbinder mButterKnife;
 
@@ -34,7 +33,6 @@ public abstract class BaseFragment extends Fragment implements BaseContextSuppor
         mButterKnife = ButterKnife.bind(this, view);
 
         setupView(view);
-        setAdapter();
         initData();
         return view;
     }
@@ -42,9 +40,6 @@ public abstract class BaseFragment extends Fragment implements BaseContextSuppor
     protected abstract int getContentViewId();
 
     protected void setupView(View rootView) {
-    }
-
-    protected void setAdapter() {
     }
 
     protected void initData() {
@@ -59,7 +54,7 @@ public abstract class BaseFragment extends Fragment implements BaseContextSuppor
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mLog.i("onCreate()");
+        mLog.i("create()");
     }
 
     @Override
@@ -83,7 +78,7 @@ public abstract class BaseFragment extends Fragment implements BaseContextSuppor
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mLog.i("onDestroy()");
+        mLog.i("destroy()");
         mButterKnife.unbind();
     }
 
@@ -99,8 +94,13 @@ public abstract class BaseFragment extends Fragment implements BaseContextSuppor
     }
 
     @Override
-    public AppManager getAppManager() {
-        return getApp().getAppManager();
+    public ControllerManager getControllerManager() {
+        return getApp().getControllerManager();
+    }
+
+    @Override
+    public HandlerManager getHandlerManager() {
+        return getApp().getHandlerManager();
     }
 
     @Override

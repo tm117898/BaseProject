@@ -87,9 +87,9 @@ public class VerticalViewGroup extends BaseViewGroup {
                     mScroller.abortAnimation();
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (mTouchUtils.isScroll()) {
-                    float moveTagY = getScrollY() - mTouchUtils.getMoveY();
-                    float moveY = -mTouchUtils.getMoveY();
+                if (mTouchHelper.isScroll()) {
+                    float moveTagY = getScrollY() - mTouchHelper.getMoveY();
+                    float moveY = -mTouchHelper.getMoveY();
                     if (mMinY > moveTagY) {
                         moveY *= OVER_PULL_COEFFICIENT;
 //                        scrollTo(mMinY, 0);
@@ -105,8 +105,8 @@ public class VerticalViewGroup extends BaseViewGroup {
                 int curY = getScrollY();
                 int childCount = getChildCount();
 
-                if (mTouchUtils.isFling()) {
-                    float moveY = mTouchUtils.getLastY() - mTouchUtils.getFirstY();
+                if (mTouchHelper.isFling()) {
+                    float moveY = mTouchHelper.getLastY() - mTouchHelper.getFirstY();
 
                     for (int i = 0; i < childCount; i++) {
                         View child = getChildAt(i);
@@ -125,7 +125,7 @@ public class VerticalViewGroup extends BaseViewGroup {
                             break;
                         }
                     }
-                } else if (mTouchUtils.isScroll()) {
+                } else if (mTouchHelper.isScroll()) {
                     for (int i = 0; i < childCount; i++) {
                         View child = getChildAt(i);
                         float childY = child.getY();

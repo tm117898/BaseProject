@@ -3,7 +3,7 @@ package cesc.shang.baselib.base.animation;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
-import cesc.shang.baselib.support.BaseContextSupport;
+import cesc.shang.baselib.support.IContextSupport;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**
@@ -12,7 +12,7 @@ import cesc.shang.utilslib.utils.debug.LogUtils;
 public abstract class BaseAnimation extends Animation {
     protected LogUtils mLog;
 
-    public BaseAnimation(BaseContextSupport support) {
+    public BaseAnimation(IContextSupport support) {
         mLog = support.getUtilsManager().getLogUtils(this.getClass().getSimpleName());
     }
 
