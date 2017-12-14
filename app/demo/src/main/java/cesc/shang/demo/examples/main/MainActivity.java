@@ -1,6 +1,8 @@
 package cesc.shang.demo.examples.main;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;

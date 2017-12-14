@@ -14,8 +14,14 @@ public class SensorUtils {
     public SensorUtils() {
     }
 
+    /**
+     * 注册加速度传感器监听
+     *
+     * @param context  上下文
+     * @param listener 回调
+     */
     public void regiterListener(Context context, SensorEventListener listener) {
-        SensorManager manager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        SensorManager manager = getSensorManager(context);
         List<Sensor> sensors = manager.getSensorList(Sensor.TYPE_ACCELEROMETER);
         if (sensors != null && sensors.size() > 0) {
             Sensor sensor = sensors.get(0);
@@ -23,8 +29,24 @@ public class SensorUtils {
         }
     }
 
+    /**
+     * 获取SensorManager
+     *
+     * @param context 上下文
+     * @return SensorManager
+     */
+    private SensorManager getSensorManager(Context context) {
+        return (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+    }
+
+    /**
+     * 反注册加速度传感器监听
+     *
+     * @param context  上下文
+     * @param listener 回调
+     */
     public void unregiterListener(Context context, SensorEventListener listener) {
-        SensorManager manager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        SensorManager manager = getSensorManager(context);
         manager.unregisterListener(listener);
     }
 }

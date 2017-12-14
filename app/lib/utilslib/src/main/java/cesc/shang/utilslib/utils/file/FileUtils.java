@@ -1,5 +1,12 @@
-
 package cesc.shang.utilslib.utils.file;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
+import android.os.storage.StorageManager;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,29 +18,34 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Environment;
-import android.os.storage.StorageManager;
-
+/**
+ * Created by shanghaolongteng on 2016/7/17.
+ */
 public class FileUtils {
+    public static final int INVALID_RESULT_INT = -1;
+    public static final int FILE_COPY_BY_STREAM_BUFFER_SIZE = 1024;
+    public static final int SAVE_ITMAP_QALITY = 100;
 
     public FileUtils() {
     }
 
+    /**
+     * SD卡是否存在
+     *
+     * @return true存在，false不存在
+     */
     public boolean exitSDcard() {
         return isExternalStorageMounted();
     }
 
     /**
      * 获取传入路径的下一级文件夹地址集合
+     *
+     * @param paths 路径集合
+     * @return 下一级文件夹地址集合
      */
     public List<String> getFilesList(String[] paths) {
-        List<String> lstFile = new ArrayList<String>();
+        List<String> lstFile = new ArrayList<>();
         for (String path : paths) {
             // lstFile.add(path);
             File[] files = new File(path).listFiles();
@@ -41,22 +53,28 @@ public class FileUtils {
             if (files != null && files.length > 0) {
                 for (int i = 0; i < files.length; i++) {
                     f = files[i];
-                    if (f.isDirectory() && f.getPath().indexOf("/.") == -1 && f.canRead())
+                    if (f.isDirectory() && f.getPath().indexOf("/.") == INVALID_RESULT_INT && f.canRead()) {
                         lstFile.add(f.getPath());
+                    }
                 }
             }
         }
         return lstFile;
     }
 
-    @SuppressLint("NewApi")
-    public String[] getExternalStorageRootDirectorys(Activity activity) {
+    /**
+     * 获取外部存储个目录集合
+     *
+     * @param context 上下文
+     * @return 目录集合，获取失败返回null
+     */
+    public String[] getExternalStorageRootDirectorys(Context context) {
         StorageManager storageManager = null;
         Method methodGetPaths = null;
         String[] paths = null;
-        if (activity != null) {
+        if (context != null) {
             try {
-                storageManager = (StorageManager) activity.getSystemService(Activity.STORAGE_SERVICE);
+                storageManager = (StorageManager) context.getSystemService(Activity.STORAGE_SERVICE);
                 methodGetPaths = storageManager.getClass().getMethod("getVolumePaths");
                 paths = (String[]) methodGetPaths.invoke(storageManager);
             } catch (Exception e) {
@@ -66,7 +84,7 @@ public class FileUtils {
                 };
             }
         }
-        activity = null;
+        context = null;
         storageManager = null;
         methodGetPaths = null;
         return paths;
@@ -76,17 +94,18 @@ public class FileUtils {
      * 判断文件或者文件夹是否存在
      *
      * @param path 文件或者文件夹路径
+     * @return true存在，false不存在
      */
     public boolean fileOrFolderIsExist(String path) {
-        File file = new File(path);
-        if (file.exists()) {
-            file = null;
-            return true;
-        }
-        file = null;
-        return false;
+        return fileOrFolderIsExist(new File(path));
     }
 
+    /**
+     * 判断文件或者文件夹是否存在
+     *
+     * @param file 文件或者文件夹
+     * @return true存在，false不存在
+     */
     public boolean fileOrFolderIsExist(File file) {
         if (file.exists()) {
             file = null;
@@ -96,104 +115,109 @@ public class FileUtils {
         return false;
     }
 
+    /**
+     * 创建文件夹
+     *
+     * @param path 文件夹路径
+     */
     public void createFolder(String path) {
         File file = new File(path);
-        if (!fileOrFolderIsExist(file))
+        if (!fileOrFolderIsExist(file)) {
             file.mkdir();
+        }
         file = null;
     }
 
+    /**
+     * 删除文件夹
+     *
+     * @param file 文件夹
+     */
     public void deleteFileOrFolder(File file) {
-        if (fileOrFolderIsExist(file))
+        if (fileOrFolderIsExist(file)) {
             file.delete();
+        }
         file = null;
     }
 
+    /**
+     * 删除文件或者文件夹
+     *
+     * @param path 文件或者文件夹路径
+     */
     public void deleteFileOrFolder(String path) {
         deleteFileOrFolder(new File(path));
     }
 
-    public void copyFile(String fromFilePath, String toFilePath, Boolean rewrite) {
+    /**
+     * 通过流复制文件
+     *
+     * @param fromFilePath 源文件绝对路径
+     * @param toFilePath   目标文件绝对路径
+     * @param reWrite      目标文件存在是否允许重写
+     */
+    public void copyFile(String fromFilePath, String toFilePath, boolean reWrite) {
         File fromFile = new File(fromFilePath);
         File toFile = new File(toFilePath);
-        copyFile(fromFile, toFile, rewrite);
-        fromFile = null;
-        toFile = null;
+        copyFile(fromFile, toFile, reWrite);
     }
 
-    public void copyFile(File fromFile, File toFile, Boolean rewrite) {
-        if (!fromFile.exists()) {
-            return;
-        }
-        if (!fromFile.isFile()) {
-            return;
-        }
-        if (!fromFile.canRead()) {
-            return;
-        }
-        if (!toFile.getParentFile().exists()) {
-            return;
-        }
-        if (toFile.exists() && rewrite) {
-            toFile.delete();
-        }
-        FileInputStream fosfrom = null;
-        FileOutputStream fosto = null;
-        try {
-            fosfrom = new FileInputStream(fromFile);
-            fosto = new FileOutputStream(toFile);
-            byte bt[] = new byte[1024];
-            int c;
-            while ((c = fosfrom.read(bt)) > 0) {
-                fosto.write(bt, 0, c);
+    /**
+     * 通过流复制文件
+     *
+     * @param fromFile 源文件
+     * @param toFile   目标文件
+     * @param reWrite  目标文件存在是否允许重写
+     */
+    public void copyFile(File fromFile, File toFile, boolean reWrite) {
+        if (fromFile.exists() && fromFile.isFile() && fromFile.canRead() && toFile.getParentFile().exists()) {
+            if (toFile.exists() && reWrite) {
+                toFile.delete();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            fromFile = null;
-            toFile = null;
-            try {
-                if (fosfrom != null) {
-                    fosfrom.close();
+
+            try (FileInputStream is = new FileInputStream(fromFile);
+                 FileOutputStream os = new FileOutputStream(toFile)) {
+                byte[] bt = new byte[FILE_COPY_BY_STREAM_BUFFER_SIZE];
+                int c;
+                while ((c = is.read(bt)) > 0) {
+                    os.write(bt, 0, c);
                 }
-                if (fosto != null) {
-                    fosto.flush();
-                    fosto.close();
-                }
-            } catch (IOException e) {
+                os.flush();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
+    /**
+     * 保存bitmap到文件
+     *
+     * @param folderPath 文件夹绝对路径
+     * @param fileName   文件名称
+     * @param bitmap     要保存的bitmap
+     * @return true成功，false失败
+     */
     public boolean saveBitmap(String folderPath, String fileName, Bitmap bitmap) {
         boolean b = false;
         createFolder(folderPath);
 
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(folderPath + "/" + fileName);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);// 把数据写入文件
+        try (FileOutputStream fos = new FileOutputStream(folderPath + "/" + fileName)) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, SAVE_ITMAP_QALITY, fos);
             fos.flush();
             b = true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            bitmap = null;
-            try {
-                if (fos != null) {
-                    fos.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                b = false;
-            }
         }
         return b;
     }
 
+    /**
+     * 外部存储是否安装
+     *
+     * @return true在，false不在
+     */
     public boolean isExternalStorageMounted() {
         File extDir = new File(getExternalStorageDirectory());
         boolean isExist = extDir.exists();
@@ -201,6 +225,11 @@ public class FileUtils {
         return isExist;
     }
 
+    /**
+     * 获取外部存储路径
+     *
+     * @return 绝对路径
+     */
     public String getExternalStorageDirectory() {
         try {
             Class clazz = Class.forName("android.os.Environment");
@@ -226,11 +255,13 @@ public class FileUtils {
         return Environment.getExternalStorageDirectory().getAbsolutePath();
     }
 
-    public File getExternalStoragePublicDirectory(String name) {
-        File dirFile = new File(getExternalStorageDirectory());
-        return new File(dirFile, name);
-    }
-
+    /**
+     * 获取Assets目录中文件is
+     *
+     * @param context  上下文
+     * @param filePath 文件路径
+     * @return InputStream，失败返回null
+     */
     public InputStream getAssetsFileInputStream(Context context, String filePath) {
         InputStream is = null;
         try {
@@ -242,11 +273,18 @@ public class FileUtils {
         return is;
     }
 
-    public boolean saveFileByInputStream(InputStream is, String filePath, String fileName, Boolean rewrite) {
+    /**
+     * 通过InputStream将文件保存到指定路径
+     *
+     * @param is       要保存的is
+     * @param filePath 文件夹路径
+     * @param fileName 文件名称
+     * @param rewrite  文件存在是否允许重写
+     * @return true成功，false失败
+     */
+    public boolean saveFileByInputStream(InputStream is, String filePath, String fileName, boolean rewrite) {
         boolean b = false;
-
         createFolder(filePath);
-
         File toFile = new File(filePath + "/" + fileName);
 
         if (rewrite) {
@@ -270,55 +308,62 @@ public class FileUtils {
         return b;
     }
 
+    /**
+     * 通过InputStream将文件保存到指定路径
+     *
+     * @param is     要保存的is
+     * @param toFile 要保存文件
+     * @return true成功，false失败
+     */
     public boolean saveFileByInputStream(InputStream is, File toFile) {
         boolean b = false;
-
         if (toFile.exists()) {
             toFile.delete();
         }
-        FileOutputStream fosto = null;
-        try {
-            fosto = new FileOutputStream(toFile);
-            byte bt[] = new byte[1024];
+
+        try (FileOutputStream os = new FileOutputStream(toFile)) {
+            byte[] bt = new byte[FILE_COPY_BY_STREAM_BUFFER_SIZE];
             int c;
             while ((c = is.read(bt)) > 0) {
-                fosto.write(bt, 0, c);
+                os.write(bt, 0, c);
             }
-
+            os.flush();
             b = true;
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        try {
-            toFile = null;
-            if (is != null) {
-                is.close();
-                is = null;
-            }
-            if (fosto != null) {
-                fosto.flush();
-                fosto.close();
-                fosto = null;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            is = null;
-            fosto = null;
         }
 
         return b;
     }
 
+    /**
+     * 将新增文件扫描到系统媒体库
+     *
+     * @param context     上下文
+     * @param fileAbsPath 新增文件绝对路径
+     */
     public void scanFileToSystem(Context context, String fileAbsPath) {
         Uri uri = Uri.parse("file://" + fileAbsPath);
         Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
         context.sendBroadcast(intent);
     }
 
+    /**
+     * 获取sd卡下缓存文件夹
+     *
+     * @param context 上下文
+     * @return file
+     */
     public File getSdCardCatchFile(Context context) {
         return context.getExternalCacheDir();
     }
 
+    /**
+     * 获取sd卡下缓存文件夹路径
+     *
+     * @param context 上下文
+     * @return file路径
+     */
     public String getSdCardCatchPath(Context context) {
         return getSdCardCatchFile(context).getAbsolutePath();
     }

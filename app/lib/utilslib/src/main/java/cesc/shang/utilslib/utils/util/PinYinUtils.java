@@ -1,12 +1,12 @@
 
 package cesc.shang.utilslib.utils.util;
 
+import android.annotation.SuppressLint;
+import android.text.TextUtils;
+
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Locale;
-
-import android.annotation.SuppressLint;
-import android.text.TextUtils;
 
 public class PinYinUtils {
 

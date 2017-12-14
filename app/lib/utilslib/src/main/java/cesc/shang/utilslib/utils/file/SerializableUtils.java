@@ -14,38 +14,33 @@ public class SerializableUtils {
     public SerializableUtils() {
     }
 
+    /**
+     * 将对象写入到文件
+     *
+     * @param fileAbsPath 文件绝对路径
+     * @param object      要写的对象
+     */
     public void writeObject(String fileAbsPath, Serializable object) {
-        ObjectOutputStream stream = null;
-        try {
-            stream = new ObjectOutputStream(new FileOutputStream(fileAbsPath));
-            stream.writeObject(object);
+        try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fileAbsPath))) {
+            os.writeObject(object);
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (stream != null)
-                    stream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
+    /**
+     * 将文件中对象还原到内存
+     *
+     * @param fileAbsPath 文件绝对路径
+     * @return 对象，读取失败返回null
+     */
     public Object readObject(String fileAbsPath) {
         Object object = null;
-        ObjectInputStream stream = null;
-        try {
-            stream = new ObjectInputStream(new FileInputStream(fileAbsPath));
-            object = stream.readObject();
+        try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(fileAbsPath))) {
+            object = is.readObject();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (stream != null)
-                    stream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            object = null;
         }
         return object;
     }

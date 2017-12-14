@@ -18,6 +18,12 @@ public class ViewUtils {
     public ViewUtils() {
     }
 
+    /**
+     * 将文字以HTML格式设置到TextView
+     *
+     * @param view TextView
+     * @param text 文字
+     */
     public void setHtmlText(TextView view, String text) {
         if (!TextUtils.isEmpty(text)) {
             view.setText(Html.fromHtml(text));
@@ -25,16 +31,35 @@ public class ViewUtils {
         }
     }
 
+    /**
+     * 设置TextView字体
+     *
+     * @param context  上下文
+     * @param fileName 字体绝对路径
+     * @param view     待设置的View
+     */
     public void setTypeface(Context context, String fileName, TextView view) {
         AssetManager as = context.getAssets();
         Typeface tf = Typeface.createFromAsset(as, fileName);
         view.setTypeface(tf);
     }
 
+    /**
+     * 获取Touch Move 临界值
+     *
+     * @param context 上下文
+     * @return 临界值，超过次值认为是Move
+     */
     public int getScaledTouchSlop(Context context) {
         return ViewConfiguration.get(context).getScaledTouchSlop();
     }
 
+    /**
+     * 设置View背景
+     *
+     * @param view     待设置的View
+     * @param drawable 背景图片
+     */
     public void setBackground(View view, Drawable drawable) {
         if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
             view.setBackgroundDrawable(drawable);

@@ -13,6 +13,11 @@ public class AnimUtils {
     public AnimUtils() {
     }
 
+    /**
+     * 停止动画
+     *
+     * @param view 做动画的View
+     */
     public void stopAnimation(View view) {
         Animation a = view.getAnimation();
         if (a != null && a.hasStarted()) {
@@ -20,6 +25,11 @@ public class AnimUtils {
         }
     }
 
+    /**
+     * 停止背景动画
+     *
+     * @param view 做动画的View
+     */
     public void stopBackgroundAnimation(View view) {
         Drawable ad = view.getBackground();
         if (ad instanceof AnimationDrawable) {
@@ -27,6 +37,11 @@ public class AnimUtils {
         }
     }
 
+    /**
+     * 停止属性动画
+     *
+     * @param animator 动画
+     */
     public void stopAnimator(Animator animator) {
         if (animator != null && animator.isRunning())
             animator.cancel();
