@@ -12,11 +12,23 @@ import cesc.shang.baselib.support.manager.UtilsManager;
  */
 
 public interface INotContextSupport {
+    /**
+     * 返回当前对象的Application
+     */
     BaseApplication getApp(Context context);
 
+    /**
+     * 返回当前对象的Application中的ControllerManager
+     */
     ControllerManager getControllerManager(Context context);
 
+    /**
+     * 返回当前对象的Application中的HandlerManager
+     */
     HandlerManager getHandlerManager(Context context);
 
+    /**
+     * 返回当前对象的Application中的UtilsManager
+     */
     UtilsManager getUtilsManager(Context context);
 }

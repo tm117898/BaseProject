@@ -1,10 +1,13 @@
 package cesc.shang.baselib.support.manager;
 
 import cesc.shang.baselib.base.application.BaseApplication;
+import cesc.shang.baselib.support.manager.base.BaseHandler;
 import cesc.shang.baselib.support.manager.base.BaseManager;
 
 /**
  * Created by shanghaolongteng on 2017/7/15.
+ * <p>
+ * 管理各个Controller类实例和生命周期
  */
 
 public class ControllerManager extends BaseManager {
@@ -16,4 +19,14 @@ public class ControllerManager extends BaseManager {
     public void onDestroy() {
 
     }
+
+    /**
+     * 释放Handler资源
+     *
+     * @param h Handler实例
+     */
+    protected void destroyController(BaseHandler h) {
+        destroyManager(h);
+    }
+
 }

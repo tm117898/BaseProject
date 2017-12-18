@@ -62,7 +62,7 @@ public class WindowActivity extends DemoBaseActivity {
                     mHalfLp.height = 500;
                     mHalfLp.format = PixelFormat.TRANSPARENT;
                     mHalfLp.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-                            | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;//可以现在是锁屏界面
+                            | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED; //可以现在是锁屏界面
                     mHalfLp.gravity = Gravity.TOP | Gravity.LEFT;
                     mHalfLp.x = 0;
                     mHalfLp.y = 0;

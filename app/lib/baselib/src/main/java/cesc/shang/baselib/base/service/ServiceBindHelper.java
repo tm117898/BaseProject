@@ -22,11 +22,21 @@ public abstract class ServiceBindHelper implements ServiceConnection {
         onCreate(support);
     }
 
+    /**
+     * 开始创建对象
+     *
+     * @param support {@link IContextSupport}
+     */
     public void onCreate(IContextSupport support) {
         mSupport = support;
         mLog = support.getUtilsManager().getLogUtils(ServiceBindHelper.class.getSimpleName());
     }
 
+    /**
+     * 开始绑定Service
+     *
+     * @param service 要绑定的service.class
+     */
     public void bindService(Class<?> service) {
         mLog.i("bindService , service : ", service, " , isBind : ", isBind);
         if (!isBind) {
@@ -36,6 +46,9 @@ public abstract class ServiceBindHelper implements ServiceConnection {
         }
     }
 
+    /**
+     * 解绑service
+     */
     public void unbindService() {
         mLog.i("unbindService , isBind : ", isBind);
         if (isBind) {
@@ -44,6 +57,9 @@ public abstract class ServiceBindHelper implements ServiceConnection {
         }
     }
 
+    /**
+     * 销毁、释放资源
+     */
     public void onDestroy() {
         mLog.i("destroy");
         unbindService();
@@ -62,12 +78,23 @@ public abstract class ServiceBindHelper implements ServiceConnection {
         }
     };
 
+    /**
+     * 连接建立
+     *
+     * @param name    已绑定service的ComponentName
+     * @param service 已绑定service的Binder对象
+     */
     protected void serviceConnected(ComponentName name, IBinder service) {
         isBind = true;
         mLog.i("onServiceConnected , name : ", name);
         ServiceBindHelper.this.onServiceConnected(name, service);
     }
 
+    /**
+     * 连接断开
+     *
+     * @param name 已绑定service的ComponentName
+     */
     protected void serviceDisconnected(ComponentName name) {
         mLog.i("onServiceDisconnected , name : ", name);
         ServiceBindHelper.this.onServiceDisconnected(name);

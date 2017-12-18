@@ -29,7 +29,7 @@ public class ListViewAnimActivityListAdapter extends AdapterViewBaseAdapter<List
     }
 
     @Override
-    public void bindData(ListEntity entity, VH vh, int viewType) {
+    public void bindData(ListEntity entity, VH vh) {
         vh.mText.setText(entity.getText());
     }
 

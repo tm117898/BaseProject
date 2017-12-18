@@ -29,7 +29,7 @@ public class TouchEventViewGroup extends BaseViewGroup {
     }
 
     @Override
-    protected boolean enableTouchUtils() {
+    protected boolean enableTouchHelper() {
         return false;
     }
 

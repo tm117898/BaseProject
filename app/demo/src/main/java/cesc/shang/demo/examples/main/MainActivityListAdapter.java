@@ -29,7 +29,7 @@ public class MainActivityListAdapter extends AdapterViewBaseAdapter<MainActivity
     }
 
     @Override
-    public void bindData(MainActivityListEntity entity, VH vh, int viewType) {
+    public void bindData(MainActivityListEntity entity, VH vh) {
         vh.mText.setText(entity.getText());
     }
 

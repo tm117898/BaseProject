@@ -43,7 +43,8 @@ public class AnimUtils {
      * @param animator 动画
      */
     public void stopAnimator(Animator animator) {
-        if (animator != null && animator.isRunning())
+        if (animator != null && animator.isRunning()) {
             animator.cancel();
+        }
     }
 }

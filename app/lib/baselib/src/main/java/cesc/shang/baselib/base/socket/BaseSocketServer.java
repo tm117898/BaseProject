@@ -21,19 +21,28 @@ import cesc.shang.utilslib.utils.util.ThreadUtils;
  * Created by shanghaolongteng on 2016/8/2.
  */
 public abstract class BaseSocketServer {
+    public static final String ACCEPT_THREAD_NAME = "BaseSocketServer-AcceptThread";
+
     protected BaseApplication mApp;
     protected LogUtils mLog;
-
     private ServerSocket mServer = null;
-    public static final String ACCEPT_THREAD_NAME = "BaseSocketServer-AcceptThread";
     private Handler mAcceptWork = null;
 
-    private Map<Object, BaseSocketClient> mRegisterClients = Collections.synchronizedMap(new HashMap<Object, BaseSocketClient>());
-    private Set<BaseSocketClient> mUnregisterClients = Collections.synchronizedSet(new HashSet<BaseSocketClient>());
+    private Map<Object, BaseSocketClient> mRegisterClients =
+            Collections.synchronizedMap(new HashMap<Object, BaseSocketClient>());
+    private Set<BaseSocketClient> mUnregisterClients =
+            Collections.synchronizedSet(new HashSet<BaseSocketClient>());
 
     public BaseSocketServer(BaseApplication app) {
         mApp = app;
         mLog = getUtilsManager().getLogUtils(BaseSocketServer.class.getSimpleName());
+        initAcceptThread();
+    }
+
+    /**
+     * 初始化server的连接等待线程
+     */
+    private void initAcceptThread() {
         mAcceptWork = getThreadUtils().getHandlerThread(ACCEPT_THREAD_NAME);
         mAcceptWork.post(new Runnable() {
             @Override
@@ -43,14 +52,9 @@ public abstract class BaseSocketServer {
         });
     }
 
-    private ThreadUtils getThreadUtils() {
-        return getUtilsManager().getThreadUtils();
-    }
-
-    private UtilsManager getUtilsManager() {
-        return mApp.getUtilsManager();
-    }
-
+    /**
+     * 创建ServerSocket，并循环等待客户端连接
+     */
     protected void init() {
         try {
             mServer = new ServerSocket(getServerPort());
@@ -69,6 +73,7 @@ public abstract class BaseSocketServer {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                acceptServerSocketFail();
             }
         }
     }
@@ -119,14 +124,43 @@ public abstract class BaseSocketServer {
         return getUtilsManager().getMapSetUtils();
     }
 
+    private ThreadUtils getThreadUtils() {
+        return getUtilsManager().getThreadUtils();
+    }
+
+    private UtilsManager getUtilsManager() {
+        return mApp.getUtilsManager();
+    }
+
+    /**
+     * 返回Server端口号
+     *
+     * @return 端口号
+     */
     public abstract int getServerPort();
 
+    /**
+     * 创建ServerSocket失败
+     */
     public abstract void initServerSocketFail();
 
+    /**
+     * 等待客户端连接时出现异常
+     */
     public abstract void acceptServerSocketFail();
 
+    /**
+     * 与客户端建立连接,返回server端的client
+     *
+     * @param socket   连接
+     * @param listener 数据回调listener
+     * @return {@link BaseSocketServer}
+     */
     public abstract BaseSocketClient initClient(Socket socket, SocketClientListener listener);
 
+    /**
+     * 断开连接并释放资源
+     */
     public void destroy() {
         mAcceptWork.removeCallbacksAndMessages(null);
 
@@ -168,6 +202,12 @@ public abstract class BaseSocketServer {
         });
     }
 
+    /**
+     * 向所有客户端发送信息
+     *
+     * @param t   要发送的数据
+     * @param <T> 要发送数据类型
+     */
     public <T extends BaseSocketSendEntity> void sendMessageByAll(T t) {
         final String message = t.convertString();
         MapSetUtils utils = getMapSetUtils();
@@ -188,6 +228,13 @@ public abstract class BaseSocketServer {
         });
     }
 
+    /**
+     * 向指定客户端发送信息
+     *
+     * @param key 指定客户端的id
+     * @param t   要发送的数据
+     * @param <T> 要发送数据类型
+     */
     public <T extends BaseSocketSendEntity> void sendMessageByKey(Object key, T t) {
         if (mRegisterClients.containsKey(key)) {
             BaseSocketClient client = mRegisterClients.get(key);

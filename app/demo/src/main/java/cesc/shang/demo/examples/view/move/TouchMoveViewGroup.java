@@ -34,7 +34,7 @@ public class TouchMoveViewGroup extends BaseViewGroup {
     }
 
     @Override
-    protected boolean enableTouchUtils() {
+    protected boolean enableTouchHelper() {
         return true;
     }
 

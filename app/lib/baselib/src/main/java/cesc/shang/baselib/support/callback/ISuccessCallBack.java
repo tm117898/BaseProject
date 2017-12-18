@@ -5,5 +5,10 @@ package cesc.shang.baselib.support.callback;
  */
 
 public interface ISuccessCallBack<T> {
+    /**
+     * 成功回调
+     *
+     * @param t 回调参数
+     */
     void onSuccess(T t);
 }

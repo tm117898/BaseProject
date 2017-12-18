@@ -25,6 +25,7 @@ import okhttp3.Response;
  */
 
 public class HttpHandler extends BaseHandler {
+    public static final int RESPONSE_SUCCESS_CODE = 200;
     protected LogUtils mLog;
     protected Gson mGson;
 
@@ -39,7 +40,18 @@ public class HttpHandler extends BaseHandler {
         mGson = null;
     }
 
-    public <T> void post(Context context, String url, JSONObject json, final Class resultClass, final IHttpCallBack<T> callback) {
+    /**
+     * 发起post请求
+     *
+     * @param context     上下文
+     * @param url         请求地址
+     * @param json        请求参数
+     * @param resultClass 返回结果类的Class
+     * @param callback    回调
+     * @param <T>         结果类泛型
+     */
+    public <T> void post(
+            Context context, String url, JSONObject json, final Class resultClass, final IHttpCallBack<T> callback) {
         NetWorkUtils utils = getUtilsManager().getNetWorkUtils();
         if (utils.isConnected(context)) {
             post(url, json, new Callback() {
@@ -58,6 +70,15 @@ public class HttpHandler extends BaseHandler {
         }
     }
 
+    /**
+     * 发起get请求
+     *
+     * @param context     上下文
+     * @param url         请求地址
+     * @param resultClass 返回结果类的Class
+     * @param callback    回调
+     * @param <T>         结果类泛型
+     */
     public <T> void get(Context context, String url, final Class resultClass, final IHttpCallBack<T> callback) {
         NetWorkUtils utils = getUtilsManager().getNetWorkUtils();
         if (utils.isConnected(context)) {
@@ -77,6 +98,13 @@ public class HttpHandler extends BaseHandler {
         }
     }
 
+    /**
+     * 调用OkHttp发出post请求
+     *
+     * @param url      请求地址
+     * @param json     请求参数
+     * @param callback OkHttp回调
+     */
     private void post(String url, JSONObject json, Callback callback) {
         OkHttpUtils utils = getUtilsManager().getOkHttpUtils();
         OkHttpClient client = utils.getClient();
@@ -89,6 +117,12 @@ public class HttpHandler extends BaseHandler {
         utils.enqueue(call, callback);
     }
 
+    /**
+     * 调用OkHttp发出get请求
+     *
+     * @param url      请求地址
+     * @param callback OkHttp回调
+     */
     private void get(String url, Callback callback) {
         OkHttpUtils utils = getUtilsManager().getOkHttpUtils();
         OkHttpClient client = utils.getClient();
@@ -96,9 +130,18 @@ public class HttpHandler extends BaseHandler {
         request(callback, utils, client, request);
     }
 
+    /**
+     * 回调通知结果
+     *
+     * @param callback    回调
+     * @param resultClass 返回结果类的Class
+     * @param response    服务端返回数据
+     * @param <T>         结果类泛型
+     * @throws IOException 获取服务端数据出错
+     */
     private <T> void notifyResult(IHttpCallBack callback, Class resultClass, Response response) throws IOException {
         if (callback != null) {
-            if (response.code() == 200) {
+            if (response.code() == RESPONSE_SUCCESS_CODE) {
                 String result = response.body().string();
                 mLog.i("onResponse , result : " + result);
                 if (resultClass == String.class) {
@@ -109,25 +152,34 @@ public class HttpHandler extends BaseHandler {
                         callback.onSuccess(t);
                     } catch (Exception e) {
                         e.printStackTrace();
+                        notifyFailure(callback);
                     }
-
                 }
             } else {
-                callback.onFail();
+                notifyFailure(callback);
             }
         }
     }
 
+    /**
+     * 回调网络未连接
+     *
+     * @param callback 回调
+     */
     private void notifyNetworkDisconnected(IHttpCallBack callback) {
         if (callback != null) {
             callback.onNetworkDisconnected();
         }
     }
 
+    /**
+     * 回调请求失败
+     *
+     * @param callback 回调
+     */
     private void notifyFailure(IHttpCallBack callback) {
         if (callback != null) {
             callback.onFail();
         }
     }
-
 }

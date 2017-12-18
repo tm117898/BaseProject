@@ -28,7 +28,7 @@ public class TouchEventView extends BaseView {
     }
 
     @Override
-    protected boolean enableTouchUtils() {
+    protected boolean enableTouchHelper() {
         return false;
     }
 

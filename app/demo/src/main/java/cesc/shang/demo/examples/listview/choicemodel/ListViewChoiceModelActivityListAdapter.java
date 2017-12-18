@@ -32,7 +32,7 @@ public class ListViewChoiceModelActivityListAdapter extends AdapterViewBaseAdapt
     }
 
     @Override
-    public void bindData(ListEntity entity, VH vh, int viewType) {
+    public void bindData(ListEntity entity, VH vh) {
         vh.mText.setText(entity.getText());
     }
 

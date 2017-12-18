@@ -42,6 +42,7 @@ import cesc.shang.utilslib.utils.widget.ViewUtils;
 
 /**
  * Created by shanghaolongteng on 2017/5/6.
+ * 管理
  */
 
 public class UtilsManager extends BaseManager {
@@ -100,6 +101,8 @@ public class UtilsManager extends BaseManager {
     public void onDestroy() {
         mLogUtils.clear();
     }
+
+
 
     public DebugUtils getDebugUtils() {
         if (mDebugUtils == null || mDebugUtils.get() == null) {

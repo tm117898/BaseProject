@@ -24,6 +24,11 @@ public abstract class InvocationBaseHandler implements InvocationHandler {
         return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), this);
     }
 
+    /**
+     * 获取代理目标对象
+     *
+     * @return 目标对象
+     */
     public Object getTarget() {
         return mTarget;
     }
@@ -37,7 +42,21 @@ public abstract class InvocationBaseHandler implements InvocationHandler {
         return result;
     }
 
+    /**
+     * 函数调用开始
+     *
+     * @param proxy  代理对象
+     * @param method 代理函数
+     * @param args   代理参数
+     */
     protected abstract void onInvokeStart(Object proxy, Method method, Object[] args);
 
+    /**
+     * 函数调用接结束
+     *
+     * @param proxy  代理对象
+     * @param method 代理函数
+     * @param args   代理参数
+     */
     protected abstract void onInvokeEnd(Object proxy, Method method, Object[] args, Object result);
 }

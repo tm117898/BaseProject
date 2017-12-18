@@ -6,9 +6,12 @@ import cesc.shang.baselib.base.application.BaseApplication;
 
 /**
  * Created by shanghaolongteng on 2016/8/2.
+ *
+ * @param <T> 对应客户端的key
  */
 public abstract class BaseSocketServerClient<T> extends BaseSocketClient<T> {
-    private BaseSocketServerClient(BaseApplication app, String targetHostName, int tagHostPort, T t, SocketClientListener listener) {
+    private BaseSocketServerClient(BaseApplication app, String targetHostName, int tagHostPort, T t,
+                                   SocketClientListener listener) {
         super(app, targetHostName, tagHostPort, t, listener);
     }
 
@@ -34,10 +37,17 @@ public abstract class BaseSocketServerClient<T> extends BaseSocketClient<T> {
 
     @Override
     protected void receiveMessage(String message) {
-        if (!disposeRegisterMessage(message))
+        if (!disposeRegisterMessage(message)) {
             super.receiveMessage(message);
+        }
     }
 
+    /**
+     * server 接收到消息，先判断是否是客户端注册类消息，不是的话再下发到{@link #onReceiveMessage(String)}
+     *
+     * @param message 消息内容
+     * @return 是否处理该消息
+     */
     protected boolean disposeRegisterMessage(String message) {
         if (message.startsWith(REGISTER_MESSAGE_START_TAG) && message.endsWith(REGISTER_MESSAGE_END_TAG)) {
             if (mListener != null) {
@@ -51,5 +61,12 @@ public abstract class BaseSocketServerClient<T> extends BaseSocketClient<T> {
         return false;
     }
 
+    /**
+     * 收到注册类消息，将这转换成对应客户端的key
+     *
+     * @param message 消息内容
+     * @param <T>     转换后的客户端的key
+     * @return 客户端的key
+     */
     public abstract <T> T convertRegisterMessage(String message);
 }

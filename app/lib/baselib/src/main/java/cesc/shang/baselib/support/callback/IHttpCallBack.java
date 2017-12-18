@@ -5,5 +5,8 @@ package cesc.shang.baselib.support.callback;
  */
 
 public interface IHttpCallBack<T> extends IFailCallBack<T> {
+    /**
+     * 当前网络未连接
+     */
     void onNetworkDisconnected();
 }

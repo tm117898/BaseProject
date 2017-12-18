@@ -17,20 +17,23 @@ import cesc.shang.utilslib.utils.util.ThreadUtils;
 
 /**
  * Created by shanghaolongteng on 2016/8/2.
+ *
+ * @param <T> 客户端身份信息
  */
 public abstract class BaseSocketClient<T> {
-    protected BaseApplication mApp;
-    protected LogUtils mLog;
     public static final String REGISTER_MESSAGE_START_TAG = "REGISTER_MESSAGE_START_TAG";
     public static final String REGISTER_MESSAGE_END_TAG = "REGISTER_MESSAGE_END_TAG";
+    private static final String READ_THREAD_NAME = "BaseSocketServer-ReadThread";
+    private static final String WRITE_THREAD_NAME = "BaseSocketServer-WriteThread";
 
-    private static final String READ_THREAD_NAME = "BaseSocketServer-ReadThread", WRITE_THREAD_NAME = "BaseSocketServer-WriteThread";
-    private Socket mSocket = null;
-    protected Handler mReadWork = null, mWriteWork = null;
-
+    protected BaseApplication mApp;
+    protected LogUtils mLog;
+    protected Handler mReadWork = null;
+    protected Handler mWriteWork = null;
     protected SocketClientListener mListener = null;
     protected T mEntity = null;
 
+    private Socket mSocket = null;
     private BufferedReader mRead = null;
     private PrintWriter mWrite = null;
 
@@ -46,7 +49,8 @@ public abstract class BaseSocketClient<T> {
         mEntity = t;
     }
 
-    public BaseSocketClient(BaseApplication app, final String targetHostName, final int tagHostPort, T t, SocketClientListener listener) {
+    public BaseSocketClient(BaseApplication app, final String targetHostName, final int tagHostPort, T t,
+                            SocketClientListener listener) {
         this(app, t, listener);
 
         mWriteWork.post(new Runnable() {
@@ -57,10 +61,19 @@ public abstract class BaseSocketClient<T> {
         });
     }
 
+    /**
+     * 初始化数据写线程
+     */
     private void initWriteWork() {
         mWriteWork = getThreadUtils().getHandlerThread(WRITE_THREAD_NAME);
     }
 
+    /**
+     * 初始化Socket连接
+     *
+     * @param targetHostName
+     * @param tagHostPort
+     */
     protected void init(String targetHostName, int tagHostPort) {
         try {
             Socket socket = new Socket(targetHostName, tagHostPort);
@@ -72,12 +85,20 @@ public abstract class BaseSocketClient<T> {
         }
     }
 
+    /**
+     * 回调通知下线并释放资源
+     */
     private void breakLine() {
         if (mListener != null)
             mListener.breakLine(this);
         destroy();
     }
 
+    /**
+     * 初始化读数据线程、和读写流、像server注册client信息
+     *
+     * @param socket
+     */
     protected void init(Socket socket) {
         mSocket = socket;
         mReadWork = getThreadUtils().getHandlerThread(READ_THREAD_NAME);
@@ -94,10 +115,18 @@ public abstract class BaseSocketClient<T> {
         }
     }
 
+    /**
+     * 获取ThreadUtils
+     *
+     * @return ThreadUtils
+     */
     private ThreadUtils getThreadUtils() {
         return mApp.getUtilsManager().getThreadUtils();
     }
 
+    /**
+     * 像server注册client信息
+     */
     protected void sendRegisterMessage() {
         StringBuffer buffer = new StringBuffer(REGISTER_MESSAGE_START_TAG);
         buffer.append(getRegisterMessage(mEntity));
@@ -106,8 +135,17 @@ public abstract class BaseSocketClient<T> {
         buffer.setLength(0);
     }
 
+    /**
+     * 获取像server注册的client信息
+     *
+     * @param t 客户端身份信息
+     * @return client信息字符串
+     */
     public abstract String getRegisterMessage(T t);
 
+    /**
+     * 循环读取服务端信息
+     */
     private void readServerMessage() {
         mReadWork.post(new Runnable() {
             @Override
@@ -131,12 +169,27 @@ public abstract class BaseSocketClient<T> {
         });
     }
 
+    /**
+     * 接收到服务端消息
+     *
+     * @param message
+     */
     protected void receiveMessage(String message) {
         onReceiveMessage(message);
     }
 
+    /**
+     * 通知服务端消息
+     *
+     * @param message
+     */
     public abstract void onReceiveMessage(String message);
 
+    /**
+     * 像服务端发送消息
+     *
+     * @param message
+     */
     public void sendMessage(final String message) {
         if (mSocket.isClosed())
             return;
@@ -150,6 +203,9 @@ public abstract class BaseSocketClient<T> {
         });
     }
 
+    /**
+     * 释放资源
+     */
     public void destroy() {
         if (mSocket.isClosed())
             return;

@@ -28,6 +28,11 @@ public abstract class BaseManager {
         return mApp;
     }
 
+    /**
+     * 释放Manager资源
+     *
+     * @param m Manager实例
+     */
     protected void destroyManager(BaseManager m) {
         if (m != null) {
             m.destroy();

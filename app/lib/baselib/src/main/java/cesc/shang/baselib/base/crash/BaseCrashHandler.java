@@ -21,10 +21,15 @@ public class BaseCrashHandler implements Thread.UncaughtExceptionHandler {
         mLog.e(ex);
 
         disposeException(thread, ex);
-
-        Process.killProcess(Process.myPid());
     }
 
+    /**
+     * 处理Exception
+     *
+     * @param thread 当前线程
+     * @param ex     当前异常
+     */
     public void disposeException(Thread thread, Throwable ex) {
+        Process.killProcess(Process.myPid());
     }
 }

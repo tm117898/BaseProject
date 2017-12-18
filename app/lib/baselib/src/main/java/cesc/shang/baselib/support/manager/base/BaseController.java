@@ -15,8 +15,4 @@ public abstract class BaseController extends BaseHandler {
     public HandlerManager getHandlerManager() {
         return getApp().getHandlerManager();
     }
-
-    protected void destroyHandler(BaseManager m) {
-        destroyManager(m);
-    }
 }

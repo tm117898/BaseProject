@@ -50,8 +50,8 @@ public class Rotate3dAnimation extends BaseAnimation {
      * @param centerY     the Y center of the 3D rotation
      * @param reverse     true if the translation should be reversed, false otherwise
      */
-    public Rotate3dAnimation(IContextSupport support,
-                             float fromDegrees, float toDegrees, float centerX, float centerY, float depthZ, boolean reverse) {
+    public Rotate3dAnimation(IContextSupport support, float fromDegrees, float toDegrees, float centerX, float centerY,
+                             float depthZ, boolean reverse) {
         super(support);
         mFromDegrees = fromDegrees;
         mToDegrees = toDegrees;

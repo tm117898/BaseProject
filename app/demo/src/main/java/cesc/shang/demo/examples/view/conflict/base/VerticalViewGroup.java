@@ -34,7 +34,7 @@ public class VerticalViewGroup extends BaseViewGroup {
     }
 
     @Override
-    protected boolean enableTouchUtils() {
+    protected boolean enableTouchHelper() {
         return true;
     }
 

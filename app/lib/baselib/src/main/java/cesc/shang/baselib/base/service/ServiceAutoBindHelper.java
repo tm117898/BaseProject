@@ -48,6 +48,9 @@ public abstract class ServiceAutoBindHelper extends ServiceBindHelper {
         }
     };
 
+    /**
+     * 连接在服务端断开
+     */
     protected void onBinderDied() {
         mLog.i("mRecipient , binderDied()");
         isBind = false;
@@ -58,6 +61,9 @@ public abstract class ServiceAutoBindHelper extends ServiceBindHelper {
         autoBindService();
     }
 
+    /**
+     * 开始重新绑定
+     */
     protected void autoBindService() {
         if (mServiceClass != null) {
             mLog.i("autoBindService");

@@ -27,7 +27,7 @@ public class TouchMoveView extends BaseView {
     }
 
     @Override
-    protected boolean enableTouchUtils() {
+    protected boolean enableTouchHelper() {
         return false;
     }
 

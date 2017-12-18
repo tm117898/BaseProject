@@ -1,8 +1,6 @@
 package cesc.shang.demo.examples.main;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -55,7 +53,7 @@ public class MainActivity extends DemoBaseActivity {
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         MainActivityListAdapter.VH vh = (MainActivityListAdapter.VH) view.getTag();
 
-        Intent intent = new Intent(MainActivity.this, vh.entity.getActivityClass());
+        Intent intent = new Intent(MainActivity.this, vh.getEntity().getActivityClass());
         startActivity(intent);
     }
 }

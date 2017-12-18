@@ -5,5 +5,8 @@ package cesc.shang.baselib.support.callback;
  */
 
 public interface IFailCallBack<T> extends ISuccessCallBack<T> {
+    /**
+     * 失败回调
+     */
     void onFail();
 }
