@@ -22,13 +22,13 @@ public class BaseContentProvider extends ContentProvider implements cesc.shang.b
     public boolean onCreate() {
         mLog = getUtilsManager().getLogUtils(this.getClass().getSimpleName());
         mLog.i("create");
-        return false;
+        return true;
     }
 
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        mLog.i("create , uri : ", uri,
+        mLog.i("query , uri : ", uri,
                 " , projection : " + projection,
                 " , selection : " + selection,
                 " , selectionArgs : " + selectionArgs,
@@ -39,21 +39,21 @@ public class BaseContentProvider extends ContentProvider implements cesc.shang.b
     @Nullable
     @Override
     public String getType(Uri uri) {
-        mLog.i("create , uri : ", uri);
+        mLog.i("getType , uri : ", uri);
         return null;
     }
 
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        mLog.i("create , uri : ", uri,
+        mLog.i("insert , uri : ", uri,
                 " , values : " + values);
         return null;
     }
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        mLog.i("create , uri : ", uri,
+        mLog.i("delete , uri : ", uri,
                 " , selection : " + selection,
                 " , selectionArgs : " + selectionArgs);
         return 0;
@@ -61,7 +61,7 @@ public class BaseContentProvider extends ContentProvider implements cesc.shang.b
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        mLog.i("create , uri : ", uri,
+        mLog.i("update , uri : ", uri,
                 " , values : " + values,
                 " , selection : " + selection,
                 " , selectionArgs : " + selectionArgs);

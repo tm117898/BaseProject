@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.manager.base.BaseController;
 import cesc.shang.baselib.support.callback.ISuccessCallBack;
+import cesc.shang.baselib.support.manager.base.BaseController;
 import cesc.shang.demo.examples.activitywwitchorder.ActivitySwitchOrderActivity1;
 import cesc.shang.demo.examples.animation.AnimationActivity;
+import cesc.shang.demo.examples.customcursor.CustomCursorActivity;
 import cesc.shang.demo.examples.customxmlarrt.CustomXmlArrtActivity;
 import cesc.shang.demo.examples.drawable.DrawableActivity;
 import cesc.shang.demo.examples.ipc.aidl.AIDLActivity;
@@ -50,6 +51,7 @@ public class MainController extends BaseController {
 
                 final List<MainActivityListEntity> list = new ArrayList<>();
 
+                list.add(new MainActivityListEntity("自定义Cursor示例", CustomCursorActivity.class));
                 list.add(new MainActivityListEntity("代理示例", ProxyActivity.class));
                 list.add(new MainActivityListEntity("反射分析示例", ReflectActivity.class));
                 list.add(new MainActivityListEntity("OkHttp示例", OkHttpActivity.class));

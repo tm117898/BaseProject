@@ -22,8 +22,21 @@ public abstract class BaseApplication<C extends ControllerManager, H extends Han
     protected LogUtils mLog;
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        init();
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
+    }
+
+    /**
+     * application初始化。
+     * 之所以在attachBaseContext中初始化，是因为Provider的onCreate（）执行早于Application的onCreate（）。
+     */
+    private void init() {
         initSupport();
         mLog = u.getLogUtils(getClass().getSimpleName());
         mLog.i("create()");
@@ -121,6 +134,7 @@ public abstract class BaseApplication<C extends ControllerManager, H extends Han
         return this;
     }
 
+    @Override
     public C getControllerManager() {
         return c;
     }

@@ -79,5 +79,12 @@
         <activity android:name=".examples.okhttp.OkHttpActivity"/>
         <activity android:name=".examples.reflect.ReflectActivity"/>
         <activity android:name=".examples.proxy.ProxyActivity"/>
+
+        <activity android:name=".examples.customcursor.CustomCursorActivity"/>
+
+        <provider
+            android:name=".examples.customcursor.CustomCursorProvider"
+            android:authorities="cesc.shang.demo.examples.customcursor"
+            android:process=":customcursor"/>
     </application>
 </manifest>
