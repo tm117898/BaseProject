@@ -1,4 +1,4 @@
-package cesc.shang.baselib.base.async;
+package cesc.shang.baselib.support.callback;
 
 /**
  * Created by Cesc Shang on 2018/03/23.

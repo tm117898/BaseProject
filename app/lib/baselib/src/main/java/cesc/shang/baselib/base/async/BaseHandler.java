@@ -7,6 +7,7 @@ import android.util.Log;
 
 import java.lang.ref.WeakReference;
 
+import cesc.shang.baselib.support.callback.AsyncCheckException;
 import cesc.shang.baselib.support.context.IContextSupport;
 
 /**

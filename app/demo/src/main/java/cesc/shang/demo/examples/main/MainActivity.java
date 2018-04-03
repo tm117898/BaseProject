@@ -5,11 +5,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnItemClick;
-import cesc.shang.baselib.support.callback.ISuccessCallBack;
+import cesc.shang.baselib.support.callback.SuccessCallBack;
 import cesc.shang.demo.R;
 import cesc.shang.demo.base.DemoBaseActivity;
 
@@ -36,15 +37,25 @@ public class MainActivity extends DemoBaseActivity {
     @Override
     public void initData() {
         super.initData();
-        getControllerManager().getMainController().initData(new ISuccessCallBack<List<MainActivityListEntity>>() {
+        getControllerManager().getMainController().initData(new CallBack(this));
+    }
+
+    private static class CallBack extends SuccessCallBack<List<MainActivityListEntity>, MainActivity> {
+        public CallBack(MainActivity ref) {
+            super(ref);
+        }
+
+        @Override
+        public void success(List<MainActivityListEntity> list, WeakReference<MainActivity> ref) {
+            ref.get().refreshList(list);
+        }
+    }
+
+    private void refreshList(final List<MainActivityListEntity> list) {
+        runOnUiThread(new Runnable() {
             @Override
-            public void onSuccess(final List<MainActivityListEntity> list) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mAdapter.setList(list);
-                    }
-                });
+            public void run() {
+                mAdapter.setList(list);
             }
         });
     }

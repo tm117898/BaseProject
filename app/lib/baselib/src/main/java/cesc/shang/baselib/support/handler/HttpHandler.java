@@ -50,8 +50,8 @@ public class HttpHandler extends BaseHandler {
      * @param callback    回调
      * @param <T>         结果类泛型
      */
-    public <T> void post(
-            Context context, String url, JSONObject json, final Class resultClass, final IHttpCallBack<T> callback) {
+    public <T> void post(Context context, String url, JSONObject json,
+                         final Class resultClass, final IHttpCallBack<T> callback) {
         NetWorkUtils utils = getUtilsManager().getNetWorkUtils();
         if (utils.isConnected(context)) {
             post(url, json, new Callback() {
@@ -79,7 +79,8 @@ public class HttpHandler extends BaseHandler {
      * @param callback    回调
      * @param <T>         结果类泛型
      */
-    public <T> void get(Context context, String url, final Class resultClass, final IHttpCallBack<T> callback) {
+    public <T> void get(Context context, String url,
+                        final Class resultClass, final IHttpCallBack<T> callback) {
         NetWorkUtils utils = getUtilsManager().getNetWorkUtils();
         if (utils.isConnected(context)) {
             get(url, new Callback() {

@@ -3,9 +3,11 @@ package cesc.shang.demo.examples.ipc.socket;
 import android.view.View;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
+
 import butterknife.BindView;
 import butterknife.OnClick;
-import cesc.shang.baselib.support.callback.ISuccessCallBack;
+import cesc.shang.baselib.support.callback.SuccessCallBack;
 import cesc.shang.demo.R;
 import cesc.shang.demo.base.DemoBaseActivity;
 
@@ -66,12 +68,19 @@ public class SocketActivity extends DemoBaseActivity {
         }
     }
 
-    private ISuccessCallBack mCallBack = new ISuccessCallBack<String>() {
-        @Override
-        public void onSuccess(String s) {
-            showMessage(s);
+    private CallBack mCallBack = new CallBack(this);
+
+    private static class CallBack extends SuccessCallBack<String, SocketActivity> {
+
+        public CallBack(SocketActivity ref) {
+            super(ref);
         }
-    };
+
+        @Override
+        public void success(String s, WeakReference<SocketActivity> ref) {
+            ref.get().showMessage(s);
+        }
+    }
 
     private void showMessage(final String message) {
         mMessageText.post(new Runnable() {
