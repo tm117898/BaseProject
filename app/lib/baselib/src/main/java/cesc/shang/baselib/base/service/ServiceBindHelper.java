@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
-import cesc.shang.baselib.support.IContextSupport;
+import cesc.shang.baselib.support.context.IContextSupport;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**

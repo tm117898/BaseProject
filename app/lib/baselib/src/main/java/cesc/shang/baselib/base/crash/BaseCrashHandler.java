@@ -2,7 +2,7 @@ package cesc.shang.baselib.base.crash;
 
 import android.os.Process;
 
-import cesc.shang.baselib.support.IContextSupport;
+import cesc.shang.baselib.support.context.IContextSupport;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**

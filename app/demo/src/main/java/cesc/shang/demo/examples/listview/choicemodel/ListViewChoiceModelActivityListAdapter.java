@@ -5,7 +5,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import cesc.shang.baselib.base.adapter.AdapterViewBaseAdapter;
-import cesc.shang.baselib.support.IContextSupport;
+import cesc.shang.baselib.support.context.IContextSupport;
 import cesc.shang.demo.R;
 import cesc.shang.demo.examples.listview.anim.ListEntity;
 

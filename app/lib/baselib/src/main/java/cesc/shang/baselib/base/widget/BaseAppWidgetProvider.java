@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.widget.RemoteViews;
 
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.INotContextSupport;
+import cesc.shang.baselib.support.context.INotContextSupport;
 import cesc.shang.baselib.support.manager.HandlerManager;
 import cesc.shang.baselib.support.manager.UtilsManager;
 import cesc.shang.utilslib.utils.debug.LogUtils;

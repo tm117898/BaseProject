@@ -6,6 +6,7 @@ import cesc.shang.baselib.base.application.BaseApplication;
 import cesc.shang.baselib.base.socket.BaseSocketClient;
 import cesc.shang.baselib.base.socket.SocketClientListener;
 import cesc.shang.baselib.support.callback.ISuccessCallBack;
+import cesc.shang.baselib.support.context.IContextSupport;
 import cesc.shang.baselib.support.manager.base.BaseController;
 
 /**
@@ -26,11 +27,11 @@ public class SocketController extends BaseController {
         user2OffLine();
     }
 
-    public void onActivityCreate(cesc.shang.baselib.support.IContextSupport support) {
+    public void onActivityCreate(IContextSupport support) {
         support.getContext().startService(new Intent(support.getContext(), SocketService.class));
     }
 
-    public void onActivityDestroy(cesc.shang.baselib.support.IContextSupport support) {
+    public void onActivityDestroy(IContextSupport support) {
         support.getContext().stopService(new Intent(support.getContext(), SocketService.class));
         mUser1 = mUser2 = null;
     }

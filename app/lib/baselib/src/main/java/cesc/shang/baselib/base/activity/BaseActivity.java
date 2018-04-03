@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cesc.shang.baselib.base.application.BaseApplication;
 import cesc.shang.baselib.base.fragment.BaseFragment;
+import cesc.shang.baselib.support.context.IContextSupport;
 import cesc.shang.baselib.support.manager.ControllerManager;
 import cesc.shang.baselib.support.manager.HandlerManager;
 import cesc.shang.baselib.support.manager.UtilsManager;
@@ -21,7 +22,7 @@ import cesc.shang.utilslib.utils.debug.LogUtils;
 /**
  * Created by shanghaolongteng on 2016/7/14.
  */
-public abstract class BaseActivity extends FragmentActivity implements cesc.shang.baselib.support.IContextSupport {
+public abstract class BaseActivity extends FragmentActivity implements IContextSupport {
     public static final int CONTENT_VIEW_LAYOUT_INVALID_ID = 0;
 
     protected LogUtils mLog;

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.INotContextSupport;
+import cesc.shang.baselib.support.context.INotContextSupport;
 import cesc.shang.baselib.support.manager.ControllerManager;
 import cesc.shang.baselib.support.manager.HandlerManager;
 import cesc.shang.baselib.support.manager.UtilsManager;

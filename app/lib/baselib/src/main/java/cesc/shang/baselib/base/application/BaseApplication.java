@@ -2,6 +2,7 @@ package cesc.shang.baselib.base.application;
 
 import android.content.Context;
 
+import cesc.shang.baselib.support.context.IContextSupport;
 import cesc.shang.baselib.support.manager.ControllerManager;
 import cesc.shang.baselib.support.manager.HandlerManager;
 import cesc.shang.baselib.support.manager.UtilsManager;
@@ -15,7 +16,7 @@ import cesc.shang.utilslib.utils.debug.LogUtils;
  * @param <U> UtilsManager 泛型
  */
 public abstract class BaseApplication<C extends ControllerManager, H extends HandlerManager, U extends UtilsManager>
-        extends MultiDexApplication implements cesc.shang.baselib.support.IContextSupport {
+        extends MultiDexApplication implements IContextSupport {
     protected C c;
     protected H h;
     protected U u;

@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.ViewGroup;
 
 import cesc.shang.baselib.base.application.BaseApplication;
+import cesc.shang.baselib.support.context.IContextSupport;
 import cesc.shang.baselib.support.manager.ControllerManager;
 import cesc.shang.baselib.support.manager.HandlerManager;
 import cesc.shang.baselib.support.manager.UtilsManager;
@@ -16,7 +17,7 @@ import cesc.shang.utilslib.utils.debug.LogUtils;
 /**
  * Created by shanghaolongteng on 2016/8/5.
  */
-public abstract class BaseViewGroup extends ViewGroup implements cesc.shang.baselib.support.IContextSupport {
+public abstract class BaseViewGroup extends ViewGroup implements IContextSupport {
     protected LogUtils mLog;
     protected ViewTouchHelper mTouchHelper = null;
 

@@ -20,7 +20,7 @@ import android.graphics.Camera;
 import android.graphics.Matrix;
 import android.view.animation.Transformation;
 
-import cesc.shang.baselib.support.IContextSupport;
+import cesc.shang.baselib.support.context.IContextSupport;
 
 /**
  * An animation that rotates the view on the Y axis between two specified angles.

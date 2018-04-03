@@ -3,7 +3,7 @@ package cesc.shang.demo.examples.proxy;
 import android.os.Parcel;
 
 import cesc.shang.baselib.base.entity.BaseEntity;
-import cesc.shang.baselib.support.IContextSupport;
+import cesc.shang.baselib.support.context.IContextSupport;
 import cesc.shang.utilslib.utils.debug.LogUtils;
 
 /**

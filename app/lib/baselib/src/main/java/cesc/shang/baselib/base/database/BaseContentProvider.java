@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 
 import cesc.shang.baselib.base.application.BaseApplication;
+import cesc.shang.baselib.support.context.IContextSupport;
 import cesc.shang.baselib.support.manager.ControllerManager;
 import cesc.shang.baselib.support.manager.HandlerManager;
 import cesc.shang.baselib.support.manager.UtilsManager;
@@ -15,7 +16,7 @@ import cesc.shang.utilslib.utils.debug.LogUtils;
 /**
  * Created by shanghaolongteng on 2016/7/31.
  */
-public class BaseContentProvider extends ContentProvider implements cesc.shang.baselib.support.IContextSupport {
+public class BaseContentProvider extends ContentProvider implements IContextSupport {
     protected LogUtils mLog;
 
     @Override

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cesc.shang.baselib.base.application.BaseApplication;
+import cesc.shang.baselib.support.context.IContextSupport;
 import cesc.shang.baselib.support.manager.ControllerManager;
 import cesc.shang.baselib.support.manager.HandlerManager;
 import cesc.shang.baselib.support.manager.UtilsManager;
@@ -21,7 +22,7 @@ import cesc.shang.utilslib.utils.debug.LogUtils;
  * Created by Cesc Shang on 2017/7/17.
  */
 
-public abstract class BaseFragment extends Fragment implements cesc.shang.baselib.support.IContextSupport {
+public abstract class BaseFragment extends Fragment implements IContextSupport {
     public static final int CONTENT_VIEW_LAYOUT_INVALID_ID = 0;
 
     protected LogUtils mLog;

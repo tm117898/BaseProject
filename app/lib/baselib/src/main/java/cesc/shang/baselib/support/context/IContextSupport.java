@@ -1,4 +1,4 @@
-package cesc.shang.baselib.support;
+package cesc.shang.baselib.support.context;
 
 import android.content.Context;
 
@@ -11,24 +11,30 @@ import cesc.shang.baselib.support.manager.UtilsManager;
  * Created by shanghaolongteng on 2017/7/15.
  */
 
-public interface INotContextSupport {
+public interface IContextSupport {
+
+    /**
+     * 返回当前对象的Context
+     */
+    Context getContext();
+
     /**
      * 返回当前对象的Application
      */
-    BaseApplication getApp(Context context);
+    BaseApplication getApp();
 
     /**
      * 返回当前对象的Application中的ControllerManager
      */
-    ControllerManager getControllerManager(Context context);
+    ControllerManager getControllerManager();
 
     /**
      * 返回当前对象的Application中的HandlerManager
      */
-    HandlerManager getHandlerManager(Context context);
+    HandlerManager getHandlerManager();
 
     /**
      * 返回当前对象的Application中的UtilsManager
      */
-    UtilsManager getUtilsManager(Context context);
+    UtilsManager getUtilsManager();
 }

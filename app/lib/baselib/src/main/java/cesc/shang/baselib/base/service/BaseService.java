@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import cesc.shang.baselib.base.application.BaseApplication;
+import cesc.shang.baselib.support.context.IContextSupport;
 import cesc.shang.baselib.support.manager.ControllerManager;
 import cesc.shang.baselib.support.manager.HandlerManager;
 import cesc.shang.baselib.support.manager.UtilsManager;
@@ -15,7 +16,7 @@ import cesc.shang.utilslib.utils.debug.LogUtils;
  * Created by shanghaolongteng on 2017/7/15.
  */
 
-public class BaseService extends Service implements cesc.shang.baselib.support.IContextSupport {
+public class BaseService extends Service implements IContextSupport {
     protected LogUtils mLog;
 
     @Override

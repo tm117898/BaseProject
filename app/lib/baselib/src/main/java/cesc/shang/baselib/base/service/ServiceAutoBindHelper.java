@@ -4,7 +4,7 @@ import android.content.ComponentName;
 import android.os.IBinder;
 import android.os.RemoteException;
 
-import cesc.shang.baselib.support.IContextSupport;
+import cesc.shang.baselib.support.context.IContextSupport;
 
 /**
  * Created by Cesc Shang on 2017/12/13.
