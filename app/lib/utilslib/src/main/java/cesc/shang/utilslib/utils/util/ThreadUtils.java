@@ -90,7 +90,7 @@ public class ThreadUtils {
         }
     }
 
-    public void exeRunanleInThread(String threadName, Runnable r) {
+    public void exeRunnableInThread(String threadName, Runnable r) {
         new Thread(r, threadName).start();
     }
 }

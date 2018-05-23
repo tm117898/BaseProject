@@ -3,7 +3,6 @@ package cesc.shang.baselib.support.controller;
 import android.os.Build;
 import android.os.Process;
 import android.util.ArraySet;
-import android.util.Log;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,13 +39,12 @@ public class InitController extends BaseController {
     }
 
     public void init() {
-        getThreadUtils().exeRunanleInThread(INIT_THREAD_NAME, new Runnable() {
+        getThreadUtils().exeRunnableInThread(INIT_THREAD_NAME, new Runnable() {
             @Override
             public void run() {
                 getThreadUtils().setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
                 initialization();
                 notifyAllListeners();
-                Log.i("shlt", "init finish");
             }
         });
     }
