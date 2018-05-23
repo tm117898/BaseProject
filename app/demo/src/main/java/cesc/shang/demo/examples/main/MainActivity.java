@@ -37,6 +37,7 @@ public class MainActivity extends DemoBaseActivity {
     @Override
     public void initData() {
         super.initData();
+        getControllerManager().getInitController().init();
         getControllerManager().getMainController().initData(new CallBack(this));
     }
 

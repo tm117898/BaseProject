@@ -29,11 +29,6 @@ public abstract class BaseApplication<C extends ControllerManager, H extends Han
         init();
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-    }
-
     /**
      * application初始化。
      * 之所以在attachBaseContext中初始化，是因为Provider的onCreate（）执行早于Application的onCreate（）。
@@ -42,8 +37,6 @@ public abstract class BaseApplication<C extends ControllerManager, H extends Han
         initSupport();
         mLog = u.getLogUtils(getClass().getSimpleName());
         mLog.i("create()");
-        initDebug();
-        getControllerManager().getInitController().init();
     }
 
     @Override
@@ -99,33 +92,6 @@ public abstract class BaseApplication<C extends ControllerManager, H extends Han
      * @return UtilsManager或其子类
      */
     protected abstract C initControllerManager();
-
-    /**
-     * 设置CrashHandler与StrictMode
-     */
-    protected void initDebug() {
-        Thread.UncaughtExceptionHandler handler = getCrashHandler();
-        if (handler != null) {
-            Thread.setDefaultUncaughtExceptionHandler(handler);
-        }
-        if (enableStrictMode()) {
-            u.getStrictModeUtils().enableStrictMode();
-        }
-    }
-
-    /**
-     * 获取 CrashHandler 实例
-     *
-     * @return BaseCrashHandler或其子类
-     */
-    protected abstract Thread.UncaughtExceptionHandler getCrashHandler();
-
-    /**
-     * 是否开始严格模式
-     *
-     * @return true开启，false关闭
-     */
-    protected abstract boolean enableStrictMode();
 
     @Override
     public Context getContext() {
