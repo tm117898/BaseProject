@@ -22,8 +22,12 @@ public class ThreadUtils {
      * @param tid      线程id
      * @param priority 优先级（-20~19）
      */
-    public void setThreadPriovity(int tid, int priority) {
+    public void setThreadPriority(int tid, int priority) {
         Process.setThreadPriority(tid, priority);
+    }
+
+    public void setThreadPriority(int priority) {
+        Process.setThreadPriority(priority);
     }
 
     /**
@@ -84,5 +88,9 @@ public class ThreadUtils {
         } else {
             handler.getLooper().quitSafely();
         }
+    }
+
+    public void exeRunanleInThread(String threadName, Runnable r) {
+        new Thread(r, threadName).start();
     }
 }

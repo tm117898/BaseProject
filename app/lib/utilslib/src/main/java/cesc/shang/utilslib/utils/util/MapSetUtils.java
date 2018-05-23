@@ -12,7 +12,7 @@ public class MapSetUtils {
         boolean findObject(K key, V value);
     }
 
-    public static <K, V> void traversalMap(Map<K, V> map, MapTraversalCallBack<K, V> callBack) {
+    public <K, V> void traversalMap(Map<K, V> map, MapTraversalCallBack<K, V> callBack) {
         if (map != null && map.size() > 0) {
             Iterator<Map.Entry<K, V>> it = map.entrySet().iterator();
             while (it.hasNext()) {
@@ -30,7 +30,7 @@ public class MapSetUtils {
         boolean findObject(V value);
     }
 
-    public static <V> void traversalSet(Set<V> set, SetTraversalCallBack<V> callBack) {
+    public <V> void traversalSet(Set<V> set, SetTraversalCallBack<V> callBack) {
         if (set != null && set.size() > 0) {
             Iterator<V> it = set.iterator();
             while (it.hasNext()) {

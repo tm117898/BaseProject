@@ -103,15 +103,14 @@ public class UtilsManager extends BaseManager {
     }
 
 
-
-    public DebugUtils getDebugUtils() {
+    public synchronized DebugUtils getDebugUtils() {
         if (mDebugUtils == null || mDebugUtils.get() == null) {
             mDebugUtils = new SoftReference<>(new DebugUtils());
         }
         return mDebugUtils.get();
     }
 
-    public LogUtils getLogUtils(String tag) {
+    public synchronized LogUtils getLogUtils(String tag) {
         LogUtils logUtils;
         if (mLogUtils.containsKey(tag)) {
             logUtils = mLogUtils.get(tag);
@@ -122,196 +121,196 @@ public class UtilsManager extends BaseManager {
         return logUtils;
     }
 
-    public ReflectUtils getReflectUtils() {
+    public synchronized ReflectUtils getReflectUtils() {
         if (mReflect == null) {
             mReflect = new ReflectUtils();
         }
         return mReflect;
     }
 
-    public ProcessUtils getProcessUtils() {
+    public synchronized ProcessUtils getProcessUtils() {
         if (mProcessUtils == null || mProcessUtils.get() == null) {
             mProcessUtils = new SoftReference<>(new ProcessUtils());
         }
         return mProcessUtils.get();
     }
 
-    public StrictModeUtils getStrictModeUtils() {
+    public synchronized StrictModeUtils getStrictModeUtils() {
         if (mStrictModeUtils == null || mStrictModeUtils.get() == null) {
             mStrictModeUtils = new SoftReference<>(new StrictModeUtils());
         }
         return mStrictModeUtils.get();
     }
 
-    public AlarmUtils getAlarmUtils() {
+    public synchronized AlarmUtils getAlarmUtils() {
         if (mAlarmUtils == null) {
             mAlarmUtils = new AlarmUtils();
         }
         return mAlarmUtils;
     }
 
-    public AppUtils getAppUtils() {
+    public synchronized AppUtils getAppUtils() {
         if (mAppUtils == null) {
             mAppUtils = new AppUtils();
         }
         return mAppUtils;
     }
 
-    public BatteryUtils getBatteryUtils() {
+    public synchronized BatteryUtils getBatteryUtils() {
         if (mBatteryUtils == null) {
             mBatteryUtils = new BatteryUtils();
         }
         return mBatteryUtils;
     }
 
-    public DeviceUtils getDeviceUtils() {
+    public synchronized DeviceUtils getDeviceUtils() {
         if (mDeviceUtils == null) {
             mDeviceUtils = new DeviceUtils();
         }
         return mDeviceUtils;
     }
 
-    public DualSimUtils getDualSimUtils() {
+    public synchronized DualSimUtils getDualSimUtils() {
         if (mDualSimUtils == null) {
             mDualSimUtils = new DualSimUtils();
         }
         return mDualSimUtils;
     }
 
-    public LocationUtils getLocationUtils() {
+    public synchronized LocationUtils getLocationUtils() {
         if (mLocationUtils == null) {
             mLocationUtils = new LocationUtils();
         }
         return mLocationUtils;
     }
 
-    public MemoryUtils getMemoryUtils() {
+    public synchronized MemoryUtils getMemoryUtils() {
         if (mMemoryUtils == null) {
             mMemoryUtils = new MemoryUtils();
         }
         return mMemoryUtils;
     }
 
-    public NetWorkUtils getNetWorkUtils() {
+    public synchronized NetWorkUtils getNetWorkUtils() {
         if (mNetWorkUtils == null) {
             mNetWorkUtils = new NetWorkUtils();
         }
         return mNetWorkUtils;
     }
 
-    public SensorUtils getSensorUtils() {
+    public synchronized SensorUtils getSensorUtils() {
         if (mSensorUtils == null) {
             mSensorUtils = new SensorUtils();
         }
         return mSensorUtils;
     }
 
-    public FileUtils getFileUtils() {
+    public synchronized FileUtils getFileUtils() {
         if (mFileUtils == null) {
             mFileUtils = new FileUtils();
         }
         return mFileUtils;
     }
 
-    public LruCatchUtils getLruCatchUtils() {
+    public synchronized LruCatchUtils getLruCatchUtils() {
         if (mLruCatchUtils == null) {
             mLruCatchUtils = new LruCatchUtils();
         }
         return mLruCatchUtils;
     }
 
-    public SerializableUtils getSerializableUtils() {
+    public synchronized SerializableUtils getSerializableUtils() {
         if (mSerializableUtils == null) {
             mSerializableUtils = new SerializableUtils();
         }
         return mSerializableUtils;
     }
 
-    public XmlUtils getXmlUtils() {
+    public synchronized XmlUtils getXmlUtils() {
         if (mXmlUtils == null) {
             mXmlUtils = new XmlUtils();
         }
         return mXmlUtils;
     }
 
-    public DateTimeUtils getDateTimeUtils() {
+    public synchronized DateTimeUtils getDateTimeUtils() {
         if (mDateTimeUtils == null) {
             mDateTimeUtils = new DateTimeUtils();
         }
         return mDateTimeUtils;
     }
 
-    public MapSetUtils getMapSetUtils() {
+    public synchronized MapSetUtils getMapSetUtils() {
         if (mMapSetUtils == null) {
             mMapSetUtils = new MapSetUtils();
         }
         return mMapSetUtils;
     }
 
-    public MessageUtils getMessageUtils() {
+    public synchronized MessageUtils getMessageUtils() {
         if (mMessageUtils == null) {
             mMessageUtils = new MessageUtils();
         }
         return mMessageUtils;
     }
 
-    public PinYinUtils getPinYinUtils() {
+    public synchronized PinYinUtils getPinYinUtils() {
         if (mPinYinUtils == null) {
             mPinYinUtils = new PinYinUtils();
         }
         return mPinYinUtils;
     }
 
-    public ThreadUtils getThreadUtils() {
+    public synchronized ThreadUtils getThreadUtils() {
         if (mThreadUtils == null) {
             mThreadUtils = new ThreadUtils();
         }
         return mThreadUtils;
     }
 
-    public TimeUtils getTimeUtils() {
+    public synchronized TimeUtils getTimeUtils() {
         if (mTimeUtils == null) {
             mTimeUtils = new TimeUtils();
         }
         return mTimeUtils;
     }
 
-    public ActivityUtils getActivityUtils() {
+    public synchronized ActivityUtils getActivityUtils() {
         if (mActivityUtils == null) {
             mActivityUtils = new ActivityUtils();
         }
         return mActivityUtils;
     }
 
-    public AnimUtils getAnimUtils() {
+    public synchronized AnimUtils getAnimUtils() {
         if (mAnimUtils == null) {
             mAnimUtils = new AnimUtils();
         }
         return mAnimUtils;
     }
 
-    public BitmapUtils getBitmapUtils() {
+    public synchronized BitmapUtils getBitmapUtils() {
         if (mBitmapUtils == null) {
             mBitmapUtils = new BitmapUtils();
         }
         return mBitmapUtils;
     }
 
-    public NotifyUtils getNotifyUtils() {
+    public synchronized NotifyUtils getNotifyUtils() {
         if (mNotifyUtils == null) {
             mNotifyUtils = new NotifyUtils();
         }
         return mNotifyUtils;
     }
 
-    public ViewUtils getViewUtils() {
+    public synchronized ViewUtils getViewUtils() {
         if (mViewUtils == null) {
             mViewUtils = new ViewUtils();
         }
         return mViewUtils;
     }
 
-    public OkHttpUtils getOkHttpUtils() {
+    public synchronized OkHttpUtils getOkHttpUtils() {
         if (mOkHttpUtils == null) {
             mOkHttpUtils = new OkHttpUtils();
         }

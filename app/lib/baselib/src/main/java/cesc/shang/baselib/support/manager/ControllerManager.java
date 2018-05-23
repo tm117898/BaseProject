@@ -1,7 +1,8 @@
 package cesc.shang.baselib.support.manager;
 
 import cesc.shang.baselib.base.application.BaseApplication;
-import cesc.shang.baselib.support.manager.base.BaseHandler;
+import cesc.shang.baselib.support.controller.InitController;
+import cesc.shang.baselib.support.manager.base.BaseController;
 import cesc.shang.baselib.support.manager.base.BaseManager;
 
 /**
@@ -11,6 +12,8 @@ import cesc.shang.baselib.support.manager.base.BaseManager;
  */
 
 public class ControllerManager extends BaseManager {
+    private InitController mInit;
+
     public ControllerManager(BaseApplication app) {
         super(app);
     }
@@ -23,10 +26,16 @@ public class ControllerManager extends BaseManager {
     /**
      * 释放Handler资源
      *
-     * @param h Handler实例
+     * @param c Handler实例
      */
-    protected void destroyController(BaseHandler h) {
-        destroyManager(h);
+    protected void destroyController(BaseController c) {
+        destroyManager(c);
     }
 
+    public synchronized InitController getInitController() {
+        if (mInit == null) {
+            mInit = new InitController(getApp());
+        }
+        return mInit;
+    }
 }

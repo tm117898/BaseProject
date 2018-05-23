@@ -33,7 +33,7 @@ public class HandlerManager extends BaseManager {
         destroyManager(h);
     }
 
-    public HttpHandler getHttpManager() {
+    public synchronized HttpHandler getHttpManager() {
         if (mHttpHandler == null) {
             mHttpHandler = new HttpHandler(getApp());
         }

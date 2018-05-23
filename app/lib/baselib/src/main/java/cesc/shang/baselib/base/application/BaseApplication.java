@@ -1,5 +1,6 @@
 package cesc.shang.baselib.base.application;
 
+import android.app.Application;
 import android.content.Context;
 
 import cesc.shang.baselib.support.context.IContextSupport;
@@ -16,7 +17,7 @@ import cesc.shang.utilslib.utils.debug.LogUtils;
  * @param <U> UtilsManager 泛型
  */
 public abstract class BaseApplication<C extends ControllerManager, H extends HandlerManager, U extends UtilsManager>
-        extends MultiDexApplication implements IContextSupport {
+        extends Application implements IContextSupport {
     protected C c;
     protected H h;
     protected U u;
@@ -42,6 +43,7 @@ public abstract class BaseApplication<C extends ControllerManager, H extends Han
         mLog = u.getLogUtils(getClass().getSimpleName());
         mLog.i("create()");
         initDebug();
+        getControllerManager().getInitController().init();
     }
 
     @Override
@@ -49,7 +51,7 @@ public abstract class BaseApplication<C extends ControllerManager, H extends Han
         super.onLowMemory();
         mLog.e("onLowMemory()");
 
-        c. destroy();
+        c.destroy();
         h.destroy();
     }
 

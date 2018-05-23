@@ -17,7 +17,7 @@ public abstract class BaseManager {
         mApp = app;
     }
 
-    public void destroy() {
+    public synchronized void destroy() {
         onDestroy();
         mApp = null;
     }
