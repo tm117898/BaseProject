@@ -49,7 +49,7 @@ public abstract class BaseApplication<C extends ControllerManager, H extends Han
         super.onLowMemory();
         mLog.e("onLowMemory()");
 
-        c.destroy();
+        c. destroy();
         h.destroy();
     }
 

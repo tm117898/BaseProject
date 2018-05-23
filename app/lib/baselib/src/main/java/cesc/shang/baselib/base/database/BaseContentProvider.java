@@ -4,6 +4,8 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import cesc.shang.baselib.base.application.BaseApplication;
@@ -25,6 +27,7 @@ public class BaseContentProvider extends ContentProvider implements IContextSupp
         mLog.i("create");
         return true;
     }
+
 
     @Nullable
     @Override
